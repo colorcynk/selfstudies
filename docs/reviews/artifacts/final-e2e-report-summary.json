@@ -1,0 +1,87 @@
+{
+  "kind": "Existing Playwright HTML report and production artifact verification",
+  "observedAtUtc": "2026-10-13T21:09:02.361307+00:00",
+  "execution": "Historical execution; report inspected read-only on resumed final evaluation. No tests re-run for this summary.",
+  "sourceReport": "playwright-report/index.html",
+  "sourceReportSha256": "51458001552e7b8082d0c964a97184fee806bdc83583722f6c9ac5f738f12d50",
+  "reportMetadata": {
+    "actualWorkers": 1
+  },
+  "stats": {
+    "total": 23,
+    "expected": 23,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "ok": true
+  },
+  "startTimeUnixMs": 1791878930211,
+  "startTimeUtc": "2026-10-13T08:08:50.211000+00:00",
+  "durationMs": 269501.183,
+  "errors": [],
+  "projectNames": [
+    "chromium"
+  ],
+  "files": [
+    {
+      "fileName": "accessibility.e2e.ts",
+      "stats": {
+        "total": 2,
+        "expected": 2,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    },
+    {
+      "fileName": "interactions.e2e.ts",
+      "stats": {
+        "total": 5,
+        "expected": 5,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    },
+    {
+      "fileName": "persistence.e2e.ts",
+      "stats": {
+        "total": 8,
+        "expected": 8,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    },
+    {
+      "fileName": "suite.e2e.ts",
+      "stats": {
+        "total": 8,
+        "expected": 8,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    }
+  ],
+  "productionArtifacts": [
+    {
+      "path": "dist/assets/index-Cdn1KLns.js",
+      "bytes": 258607,
+      "sha256": "a3db821ce0ee00814614c955254e451f74587b25b3dcda44a2af1815f52f4545"
+    },
+    {
+      "path": "dist/assets/index-DOyhQEp6.css",
+      "bytes": 32384,
+      "sha256": "7c2275c3577e4a140611b9f7428af7d11ceb68693aa4aed7eabeba5de3e46548"
+    }
+  ],
+  "limitations": [
+    "Historical /tmp command logs and native mouse probe receipts are no longer available on disk. Earlier direct observations remain recorded in the evaluation conversation and permanent handoffs.",
+    "This extraction is evidence of the retained report, not a new test execution."
+  ]
+}

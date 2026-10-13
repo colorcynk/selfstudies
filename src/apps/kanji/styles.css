@@ -1,0 +1,37 @@
+.kanji-select,.kanji-question{display:grid;gap:18px}
+.kanji-topline,.kanji-book-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.kanji-topline p,.kanji-card>p{margin:0;color:#716d62}
+.kanji-card{background:#fff;border:1px solid #e9e4d8;border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:0 8px 24px #554b3212}
+.kanji-card h2{font-size:clamp(19px,3vw,24px);margin:0;color:#343830}
+.kanji-topline .kanji-secondary,.kanji-book-heading .kanji-secondary{flex:none}
+.kanji-secondary{min-height:44px;padding:0 16px;border:1px solid #e4ded1;border-radius:999px;background:#fff;font-weight:850}
+.kanji-toggle{display:flex;gap:10px}
+.kanji-toggle button{min-height:48px;flex:1;border:2px solid #e9e4d8;border-radius:14px;background:#fff;font-weight:900}
+.kanji-toggle button.is-selected,.kanji-choices button.is-selected{border-color:#5083b4;background:#e9f3fc;color:#285b88}
+.kanji-select .kanji-card{display:grid;gap:19px}
+.kanji-mode{display:grid;grid-template-columns:44px 1fr;grid-template-rows:auto auto;gap:2px 12px;align-items:center;min-height:74px;padding:12px 16px;border:1px solid #e9e4d8;border-radius:16px;background:#fff;text-align:left}
+.kanji-mode:hover,.kanji-stages button:hover{border-color:#efb58b;background:#fffaf5}
+.kanji-mode>span{grid-row:1 / 3;display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#fff0d8;font-size:23px}
+.kanji-mode b{font-size:15px}.kanji-mode small{color:#77796f;font-size:12px}
+.kanji-stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.kanji-stages button{display:flex;min-width:0;min-height:96px;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;padding:12px;border:1px solid #e9e4d8;border-radius:16px;background:#fff;text-align:left}
+.kanji-stages button>b{display:grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#ffedc8;color:#a66b2a}.kanji-stages button span{font-weight:900;font-size:13px}.kanji-stages button small{color:#77796f}
+.kanji-progress{display:flex;justify-content:space-between;gap:12px;color:#716d62;font-size:13px;font-weight:800}.kanji-progress b{color:#44463e}
+.kanji-meter{height:9px;background:#f0eee8;border-radius:9px;overflow:hidden}.kanji-meter i{display:block;height:100%;border-radius:inherit;background:#7db38c;transition:width .2s ease}
+.kanji-skill{display:inline-flex;width:max-content;margin:3px 0 0;padding:6px 11px;border-radius:999px;background:#f3eedf;color:#80643c;font-size:13px;font-weight:900}
+.kanji-question>h2{font-size:clamp(21px,4vw,29px);line-height:1.65;text-align:center;margin:8px 0}
+.kanji-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.kanji-choices button{min-width:44px;min-height:52px;padding:9px;border:2px solid #e9e4d8;border-radius:15px;background:#fff;font-size:19px;font-weight:900;transition:background .15s,border-color .15s}
+.kanji-choices button:hover:not(:disabled){border-color:#e9ae7d;background:#fffaf5}.kanji-choices button.is-wrong{border-color:#d78266;background:#fff0e9;color:#9c4b35}
+.kanji-check{justify-self:center;min-width:min(100%,260px);margin-top:3px}
+.kanji-question .feedback{margin:0}
+.kanji-sentence{padding:21px 12px 25px;border-radius:18px;background:#fff8e9;text-align:center;font-size:clamp(23px,5vw,36px);font-weight:900;line-height:2.1;overflow-wrap:anywhere}
+.kanji-target{position:relative;display:inline-block;margin:0 2px;padding:0 4px;border-bottom:3px solid #e89a56;color:#343830}
+.kanji-target>strong{position:absolute;top:-11px;left:50%;display:grid;place-items:center;width:21px;height:21px;transform:translateX(-50%);border-radius:50%;background:#e98c59;color:#fff;font-size:12px;line-height:1}
+.kanji-target ruby{ruby-position:over}.kanji-target rt{color:#b75c35;font-size:.42em;font-weight:900;line-height:1.1}
+.kanji-instruction{text-align:center;color:#69685f;margin:0;font-size:14px}.kanji-instruction b{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#e98c59;color:#fff}
+.kanji-target-groups{display:grid;gap:14px}.kanji-target-group{min-width:0;margin:0;padding:14px;border:1px solid #e5dfd3;border-radius:17px}.kanji-target-group legend{padding:0 6px;font-weight:900}.kanji-target-group legend span{display:inline-grid;place-items:center;width:25px;height:25px;margin-right:7px;border-radius:50%;background:#e98c59;color:#fff}.kanji-target-group:disabled{opacity:.72}.kanji-target-group .feedback{margin-top:9px}
+.kanji-result{text-align:center;display:grid;justify-items:center;gap:15px}.kanji-trophy{font-size:64px}.kanji-result h2{font-size:28px}.kanji-result p{margin:0;font-size:18px;font-weight:900;color:#44463e}.kanji-reward{padding:14px 19px;border-radius:14px;background:#fff3d3;color:#8a6026;font-weight:900}.kanji-result .kanji-secondary{margin-top:0}
+.kanji-book-heading h2{margin:0}.kanji-book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:20px 0}.kanji-book-item{display:grid;justify-items:center;gap:5px;min-height:116px;padding:14px 8px;border:1px solid #e8e2d7;border-radius:16px;background:#f6f4ef;text-align:center;color:#89877f}.kanji-book-item.owned{border-color:#f0d792;background:#fff7df;color:#705329}.kanji-book-item>span{font-size:27px}.kanji-book-item b{font-size:13px}.kanji-book-item small{font-size:10px}.kanji-book-count{text-align:center;font-weight:900;color:#726144!important}
+@media(max-width:560px){.kanji-topline{align-items:flex-start;flex-direction:column}.kanji-card{padding:20px 16px;border-radius:20px}.kanji-stages{grid-template-columns:repeat(2,minmax(0,1fr))}.kanji-stages button{min-height:84px}.kanji-progress{font-size:11px}.kanji-choices button{min-height:50px}.kanji-book-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.kanji-target-group{padding:12px}}
+@media(prefers-reduced-motion:reduce){.kanji-meter i,.kanji-choices button{transition:none}}
