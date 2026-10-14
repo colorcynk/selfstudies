@@ -14,6 +14,11 @@ export const CATALOG: readonly CatalogEntry[] = [
   ...Array.from({ length: 4 }, (_, i) => ({ appId: 'shopping' as const, modeId: 'standard' as const, stageId: `shopping:quest-0${i + 1}`, questionCount: 2, reward: { kind: 'stamp' as const, id: `stamp:quest-0${i + 1}` } })),
   { appId: 'shopping', modeId: 'multiplication-count', stageId: 'shopping:quest-05', questionCount: 3, reward: { kind: 'stamp', id: 'stamp:quest-05' } },
   { appId: 'shopping', modeId: 'multiplication-money', stageId: 'shopping:quest-06', questionCount: 3, reward: { kind: 'stamp', id: 'stamp:quest-06' } },
+  ...([
+    [7, 'standard'], [8, 'standard'], [9, 'multiplication-count'],
+    [10, 'multiplication-money'], [11, 'standard'], [12, 'multiplication-count'],
+    [13, 'multiplication-money'], [14, 'multiplication-money'], [15, 'multiplication-count'],
+  ] as const).map(([number, modeId]) => ({ appId: 'shopping' as const, modeId, stageId: `shopping:quest-${String(number).padStart(2, '0')}`, questionCount: modeId === 'standard' ? 2 : 3, reward: { kind: 'stamp' as const, id: `stamp:quest-${String(number).padStart(2, '0')}` } })),
   ...[2, 3].flatMap((grade) => Array.from({ length: 4 }, (_, i) => ({ appId: 'kanji' as const, modeId: 'standard' as const, stageId: `kanji:g${grade}-0${i + 1}`, questionCount: 5, reward: { kind: 'treasure' as const, id: `treasure:g${grade}-0${i + 1}` } }))),
   { appId: 'kanji', modeId: 'reading-difference', stageId: 'kanji:reading-difference-01', questionCount: 5, reward: { kind: 'treasure', id: 'treasure:reading-difference-01' } },
   ...(['addition', 'subtraction', 'multiplication'] as const).flatMap((operation) => ([10, 25, 100] as const).map((size) => ({ appId: 'calculation' as const, modeId: operation, stageId: `calculation:${operation}-${size}`, questionCount: size, calculation: { operation, size } }))),

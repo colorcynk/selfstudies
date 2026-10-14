@@ -12,6 +12,7 @@ type Screen = 'select' | 'play' | 'result' | 'stamps'
 type Step = 'basket' | 'multiply' | 'total' | 'change'
 type Run = { quest: ShoppingQuest; sessionId: string }
 const unitFor = (quest: ShoppingQuest, step: Step) => step === 'total' || step === 'change' || (step === 'multiply' && quest.modeId === 'multiplication-money') ? '円' : 'こ'
+const questIcons = ['🍎','🍪','✏️','🥕','🍬','✏️','🥖','📒','🍬','🧃','🥕','🍬','📒','🍪','🍬']
 const makeId = () => globalThis.crypto?.randomUUID?.() ?? `shopping-${Date.now()}-${Math.random().toString(36).slice(2)}`
 
 export default function Shopping() {
@@ -139,12 +140,12 @@ export default function Shopping() {
   return <GameLayout title="おかいものクエスト" description="かごをととのえて、お金の計算にチャレンジしよう！">
     {storageStatus !== 'ready' && <p className="shop-storage" role="status">記録を保存できないことがあります。それでもあそべるよ。</p>}
     {screen === 'select' && <section className="shop-panel">
-      <div className="shop-panel-head"><div><p className="shop-kicker">おみせのぼうけん</p><h2>どのおつかいにする？</h2><p>クリアしたクエストは、何度でもあそべるよ。</p></div><button className="shop-secondary" onClick={() => setScreen('stamps')}>スタンプを見る <span>{ownedStamps.length}/6</span></button></div>
+      <div className="shop-panel-head"><div><p className="shop-kicker">おみせのぼうけん</p><h2>どのおつかいにする？</h2><p>クリアしたクエストは、何度でもあそべるよ。</p></div><button className="shop-secondary" onClick={() => setScreen('stamps')}>スタンプを見る <span>{ownedStamps.length}/{SHOPPING_QUESTS.length}</span></button></div>
       <div className="shop-quests">{SHOPPING_QUESTS.map((quest, index) => {
         const stampId = `stamp:${quest.id.replace('shopping:', '')}`
         const owned = progress.rewards.stamp.includes(stampId)
         return <button key={quest.id} className={`shop-quest ${owned ? 'is-owned' : ''}`} onClick={() => begin(quest)}>
-          <span className="shop-quest-number">おつかい {String(index + 1).padStart(2, '0')}</span><span className="shop-quest-icon" aria-hidden="true">{['🍎','🍪','✏️','🥕','🍬','✏️'][index]}</span>
+          <span className="shop-quest-number">おつかい {String(index + 1).padStart(2, '0')}</span><span className="shop-quest-icon" aria-hidden="true">{questIcons[index]}</span>
           <strong>{quest.title}</strong><span className="shop-quest-desc">{quest.modeId === 'standard' ? 'かご・合計・おつり' : quest.modeId === 'multiplication-count' ? 'かご・かけ算・合計・おつり' : 'かご・金額のかけ算・合計・おつり'}</span>
           <span className="shop-quest-badge">{owned ? '★ クリアずみ' : 'おつかいへ →'}</span>
         </button>
@@ -192,6 +193,6 @@ export default function Shopping() {
 
     {screen === 'result' && run && <section className="shop-panel shop-result"><div className="shop-result-stamp" aria-hidden="true">★</div><p className="shop-kicker">おつかい クリア！</p><h2>{run.quest.title}のスタンプをもらったよ！</h2><p className="shop-score">はじめに正解した数 <strong>{firstCorrect} / {run.quest.multiplication ? 3 : 2}</strong></p><p className="shop-result-note">{run.quest.multiplication ? 'かご・かけ算・合計・おつり' : 'かご・合計・おつり'} ができたね。</p><div className="shop-result-actions"><button className="shop-primary" onClick={() => setScreen('stamps')}>スタンプを見る</button><button className="shop-secondary" onClick={() => setScreen('select')}>ほかのおつかいへ</button><button className="shop-secondary" onClick={() => begin(run.quest)}>もういちどあそぶ</button></div></section>}
 
-    {screen === 'stamps' && <section className="shop-panel"><div className="shop-panel-head"><div><p className="shop-kicker">クリアのきろく</p><h2>おつかいスタンプ</h2><p>{ownedStamps.length} / 6 こ あつまったよ！</p></div><button className="shop-secondary" onClick={() => setScreen(completed.current && run ? 'result' : 'select')}>もどる</button></div><div className="shop-stamps">{SHOPPING_QUESTS.map((quest, i) => { const owned = progress.rewards.stamp.includes(`stamp:${quest.id.replace('shopping:', '')}`); return <div className={`shop-stamp ${owned ? 'is-owned' : ''}`} key={quest.id}><span aria-hidden="true">{owned ? '★' : '☆'}</span><strong>{quest.title}</strong><small>{owned ? 'クリア！' : 'クエストにちょうせん'}</small><em>{String(i + 1).padStart(2, '0')}</em></div> })}</div><button className="shop-primary shop-stamps-start" onClick={() => setScreen('select')}>クエストをえらぶ</button></section>}
+    {screen === 'stamps' && <section className="shop-panel"><div className="shop-panel-head"><div><p className="shop-kicker">クリアのきろく</p><h2>おつかいスタンプ</h2><p>{ownedStamps.length} / {SHOPPING_QUESTS.length} こ あつまったよ！</p></div><button className="shop-secondary" onClick={() => setScreen(completed.current && run ? 'result' : 'select')}>もどる</button></div><div className="shop-stamps">{SHOPPING_QUESTS.map((quest, i) => { const owned = progress.rewards.stamp.includes(`stamp:${quest.id.replace('shopping:', '')}`); return <div className={`shop-stamp ${owned ? 'is-owned' : ''}`} key={quest.id}><span aria-hidden="true">{owned ? '★' : '☆'}</span><strong>{quest.title}</strong><small>{owned ? 'クリア！' : 'クエストにちょうせん'}</small><em>{String(i + 1).padStart(2, '0')}</em></div> })}</div><button className="shop-primary shop-stamps-start" onClick={() => setScreen('select')}>クエストをえらぶ</button></section>}
   </GameLayout>
 }

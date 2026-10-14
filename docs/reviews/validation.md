@@ -74,3 +74,24 @@ bun run preview --host 127.0.0.1 --port 4186 --strictPort
 追加の独立ブラウザー確認では、通常の買い物クエストで実マウスのダブルクリックをかご確定・続行・数値設問の続行に行い、375pxと1280pxの両方で次の空欄が誤答にならず、最後に2/2と履歴1件・スタンプ1件が保存された。中断前に完了して直接観測した確認であり、再開時にはその一時ログが消失していることも評価に含めた。
 
 実機・Chromium以外・複数タブ同時書き込み・公開環境の確認は承認済み範囲の対象外。ローカルで使う初版の実装・検証は完了し、公開とコミットは行っていない。
+
+## 買い物クエスト15件への拡充（2026-10-14）
+
+既存の出題形式で9件を追加し、全15件に拡充した。既存01〜06の問題データは変更していないことをGitの初版と照合した。通常7件・個数のかけ算4件・金額のかけ算4件で、後半は3〜4種類の商品を組み合わせる。合計と支払金額はすべて1,000円以内。既存ID・報酬ID・保存形式version 1を維持し、共通カタログは42件となった。
+
+- `bun run typecheck`：成功。
+- `bun run test`：6ファイル29件成功。全15件の合計・おつり・かけ算を手計算の期待値と照合し、旧6件の保存データから新しいスタンプを追加できることを確認。
+- 本番ビルド：E2EのwebServerが実行した `bun run build` で成功。
+- Chromium E2E：全体実行は40件成功・2件失敗。失敗原因はテストの旧件数の期待値と、保存データ投入後の再読み込み漏れ。両方を修正し、該当2件の再実行が成功。計42種類のシナリオを確認し、未解決の失敗はない。
+- 追加した `tests/e2e/shopping.e2e.ts` で全15件を実際に完了し、満点・対応するスタンプ・再読み込み後の保持を確認。旧6件のスタンプと履歴を維持したまま15番目を完了し、7件目のスタンプを追加できることも確認。
+- 375px・768px・1280pxで15件のクエストとスタンプを表示し、末尾まで操作でき、画面全体の横はみ出しがないことを確認。
+- `agent-browser` で375pxの先頭・末尾と1280pxの全体を撮影し、文字・アイコン・操作ボタンの表示を目視確認。画像は `/tmp/shopping-15-{mobile,mobile-last,desktop}.png`。初版の保存済み画像は維持し、今回のE2E画像は `/tmp/shopping-15-generated-artifacts/` に退避した。
+
+実行コマンド：
+
+```sh
+PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/shopping-15-e2e.json bun run test:e2e --reporter=list,json --output=/tmp/shopping-15-test-results
+PLAYWRIGHT_JSON_OUTPUT_FILE=/tmp/shopping-15-e2e-recheck.json bun run test:e2e --grep 'B9/B10 accessible|original six stamps' --reporter=list,json --output=/tmp/shopping-15-recheck-results
+```
+
+両実行の統計と確認範囲は[15件拡充の検証結果](artifacts/shopping-15-validation-summary.json)に保存した。JSONレポートと画像の `/tmp/` 保存先は一時領域である。画面確認はローカルChromiumで行った。

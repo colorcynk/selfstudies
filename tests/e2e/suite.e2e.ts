@@ -56,16 +56,16 @@ test('B3 shopping basket, count/money quests, rewards and incomplete session', a
   await go(page, '/shopping'); await page.locator('.shop-quest').first().click()
   await gameButton(page, /このかごで決定/).click(); await expect(page.getByText(/かごをなおそう/)).toBeVisible()
   await page.getByRole('button', { name: /クエストをやめる/ }).click()
-  await gameButton(page, /スタンプを見る/).click(); await expect(page.getByText(/0 \/ 6 こ/)).toBeVisible()
+  await gameButton(page, /スタンプを見る/).click(); await expect(page.getByText(/0 \/ 15 こ/)).toBeVisible()
   await gameButton(page, /クエストをえらぶ/).click()
-  await finishShopping(page, 0, true); await gameButton(page, /スタンプを見る/).click(); await expect(page.getByText(/1 \/ 6 こ/)).toBeVisible()
+  await finishShopping(page, 0, true); await gameButton(page, /スタンプを見る/).click(); await expect(page.getByText(/1 \/ 15 こ/)).toBeVisible()
   await gameButton(page, /クエストをえらぶ/).click()
   await finishShopping(page, 4); await expect(page.getByText(/はじめに正解した数 3 \/ 3/)).toBeVisible()
   await gameButton(page, /もういちどあそぶ/).click()
   await finishShopping(page, 4)
   await gameButton(page, /ほかのおつかいへ/).click()
   await finishShopping(page, 5); await expect(page.getByText(/はじめに正解した数 3 \/ 3/)).toBeVisible()
-  await page.reload(); await expect(page.getByRole('button', { name: /3\/6/ })).toBeVisible()
+  await page.reload(); await expect(page.getByRole('button', { name: /3\/15/ })).toBeVisible()
 })
 
 test('B4/B5 normal kanji both grades and reading-difference independent targets/rewards', async ({ page }) => {
@@ -133,7 +133,7 @@ test('B12 production catalog agrees with actual content fixtures and completion 
     { appId: 'kanji', modeId: 'reading-difference', stageId: 'kanji:reading-difference-01', questionCount: READING_DIFFERENCE_SENTENCES.length },
     ...(['addition','subtraction','multiplication'] as const).flatMap(operation => ([10,25,100] as const).map(size => ({ appId: 'calculation', modeId: operation, stageId: `calculation:${operation}-${size}`, questionCount: size }))),
   ]
-  expect(actual).toHaveLength(33)
+  expect(actual).toHaveLength(42)
   expect(CATALOG.map(({ appId, modeId, stageId, questionCount }) => ({ appId, modeId, stageId, questionCount }))).toEqual(actual)
   expect(new Set(CATALOG.filter(entry => entry.appId === 'kanji').map(entry => entry.reward?.id)).size).toBe(9)
   await finishShopping(page, 5)

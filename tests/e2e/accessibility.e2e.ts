@@ -118,7 +118,7 @@ async function runMeaningfulScreens(page: Page, width: number) {
   await expect(page.getByText(/おつかい クリア/)).toBeVisible()
   await visiblePrimaryButtonsMeetTarget(page, 'shopping result', width)
   await page.getByRole('button', { name: /スタンプを見る/ }).click()
-  await expect(page.getByText(/1 \/ 6 こ/)).toBeVisible()
+  await expect(page.getByText(/1 \/ 15 こ/)).toBeVisible()
   await noUnexpectedHorizontalOverflow(page, 'shopping collection', width)
 
   await completeKanji(page, 2, 0)

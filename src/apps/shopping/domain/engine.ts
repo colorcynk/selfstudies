@@ -41,7 +41,7 @@ export function changeYen(paidYen: number, total: number): number {
 
 export function validateQuest(quest: ShoppingQuest, products: readonly Product[]): string[] {
   const errors: string[] = []
-  if (!/^shopping:quest-0[1-6]$/.test(quest.id)) errors.push('Invalid catalog stage ID')
+  if (!/^shopping:quest-(0[1-9]|1[0-5])$/.test(quest.id)) errors.push('Invalid catalog stage ID')
   const catalogEntry = CATALOG.find((entry) => entry.appId === 'shopping' && entry.stageId === quest.id)
   if (!catalogEntry || catalogEntry.modeId !== quest.modeId) errors.push('Quest mode or stage does not match the shared catalog')
   if (catalogEntry && catalogEntry.questionCount !== (quest.multiplication ? 3 : 2)) errors.push('Numeric question count does not match the shared catalog')
@@ -80,16 +80,17 @@ export function validateProducts(products: readonly Product[]): string[] {
 
 export function validateQuestCatalog(quests: readonly ShoppingQuest[], products: readonly Product[]): string[] {
   const errors: string[] = []
-  if (quests.length !== 6) errors.push('Exactly six catalog quests are required')
+  const catalogQuests = CATALOG.filter(({ appId }) => appId === 'shopping')
+  if (quests.length !== catalogQuests.length) errors.push('Quest count must match the shared catalog')
   const ids = new Set<string>()
   for (const quest of quests) {
     if (ids.has(quest.id)) errors.push(`Duplicate quest ID: ${quest.id}`)
     ids.add(quest.id)
     errors.push(...validateQuest(quest, products).map((error) => `${quest.id}: ${error}`))
   }
-  for (let number = 1; number <= 6; number += 1) if (!ids.has(`shopping:quest-0${number}`)) errors.push(`Missing catalog quest shopping:quest-0${number}`)
-  if (quests.filter(({ modeId }) => modeId === 'multiplication-count').length !== 1) errors.push('Exactly one count multiplication quest is required')
-  if (quests.filter(({ modeId }) => modeId === 'multiplication-money').length !== 1) errors.push('Exactly one money multiplication quest is required')
+  for (const { stageId } of catalogQuests) if (!ids.has(stageId)) errors.push(`Missing catalog quest ${stageId}`)
+  if (!quests.some(({ modeId }) => modeId === 'multiplication-count')) errors.push('At least one count multiplication quest is required')
+  if (!quests.some(({ modeId }) => modeId === 'multiplication-money')) errors.push('At least one money multiplication quest is required')
   return errors
 }
 

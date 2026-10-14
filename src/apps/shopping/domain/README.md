@@ -9,6 +9,8 @@ This folder contains the typed data contract and pure arithmetic/validation help
 - `ShoppingQuest`: catalog `id`, catalog `modeId`, Japanese story and basket prompt, expected editable basket, integer `paidYen`, stage hints, and optional multiplication question. Standard quests have a basket step plus total and change numeric questions (2 catalog questions). Multiplication quests add a multiplication numeric question (3 catalog questions).
 - `multiplication.operation` distinguishes `count` (answer unit is item count) from `money` (answer unit is yen). Its factor must match the expected basket quantity.
 
+There are 15 fixed quests (IDs `shopping:quest-01` through `shopping:quest-15`), with totals and payments at most 1,000 yen. Quests 01–06 retain their original data and rewards. Later quests combine up to four products with count or money multiplication. Catalog validation requires exact coverage of the shared shopping catalog.
+
 Fixtures are exported as `PRODUCTS` and `SHOPPING_QUESTS` from `src/apps/shopping/data/products.ts` and `src/apps/shopping/data/quests.ts`.
 
 ## Functions
@@ -23,4 +25,4 @@ Import from `./engine`:
 - `multiplicationAnswer(quest, products)` returns count for count mode or yen for money mode.
 - `validateProducts`, `validateQuest`, and `validateQuestCatalog` return an array of human-readable validation errors; an empty array means valid. Catalog validation uses the shared progress catalog.
 
-Do not derive completion rewards here. T5 should use the shared progress API with the quest's exact `modeId` and `id`.
+Do not derive completion rewards here. The shopping UI should use the shared progress API with the quest's exact `modeId` and `id`.

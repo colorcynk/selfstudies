@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-14",
+  "shoppingQuestCount": 15,
+  "catalogEntryCount": 42,
+  "originalSixQuestDataUnchanged": true,
+  "storageVersion": 1,
+  "typecheck": "passed",
+  "unitTests": {
+    "filesPassed": 6,
+    "testsPassed": 29
+  },
+  "productionBuild": "passed via Playwright webServer",
+  "e2e": {
+    "browser": "Playwright Chromium",
+    "fullRun": {
+      "startTime": "2026-10-14T08:41:53.019Z",
+      "duration": 190186.641,
+      "expected": 40,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "focusedRecheck": {
+      "startTime": "2026-10-14T08:45:38.634Z",
+      "duration": 60468.327000000005,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "finalVerifiedUniqueTests": 42,
+    "initialFailures": [
+      "Accessibility assertion still expected 1 / 6 stamps; updated to 1 / 15.",
+      "Compatibility fixture was inserted after provider mount without reloading; added a reload before checking saved stamps."
+    ],
+    "unresolvedFailures": 0,
+    "sourceReports": [
+      "/tmp/shopping-15-e2e.json",
+      "/tmp/shopping-15-e2e-recheck.json"
+    ]
+  },
+  "shoppingCoverage": [
+    "All 15 quests: completion, full score, exact reward and reload",
+    "Original six stamps and history preserved while adding quest 15",
+    "15 quest cards and stamps without horizontal overflow at 375, 768 and 1280 pixels"
+  ],
+  "visualReview": {
+    "viewports": [
+      375,
+      1280
+    ],
+    "screenshots": [
+      "/tmp/shopping-15-mobile.png",
+      "/tmp/shopping-15-mobile-last.png",
+      "/tmp/shopping-15-desktop.png"
+    ]
+  }
+}

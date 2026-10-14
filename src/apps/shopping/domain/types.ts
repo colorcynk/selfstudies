@@ -14,7 +14,7 @@ export interface BasketLine {
 }
 
 export interface ShoppingQuest {
-  id: `shopping:quest-0${1 | 2 | 3 | 4 | 5 | 6}`
+  id: `shopping:quest-${`0${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9}` | `1${0 | 1 | 2 | 3 | 4 | 5}`}`
   modeId: ShoppingMode
   title: string
   story: string

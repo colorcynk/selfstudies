@@ -14,7 +14,7 @@ class MemoryStorage implements StorageLike {
 
 describe('progress catalog and reducer', () => {
   it('defines the approved catalog and rejects mismatched or out-of-range completions', () => {
-    expect(CATALOG).toHaveLength(33)
+    expect(CATALOG).toHaveLength(42)
     expect(validateCompletionRecord(record())).toBe(true)
     expect(validateCompletionRecord(record({ stageId: 'monsters:dan-10' }))).toBe(false)
     expect(validateCompletionRecord(record({ questionCount: 8 }))).toBe(false)
@@ -70,5 +70,29 @@ describe('versioned storage', () => {
       }))
       expect(loadProgress(storage)).toEqual({ progress: emptyProgress(), storageStatus: 'corrupt' })
     }
+  })
+
+  it('keeps all original shopping stamps and accepts new two-digit quests after reload', () => {
+    const storage = new MemoryStorage()
+    let progress = emptyProgress()
+    for (let number = 1; number <= 6; number++) {
+      progress = addCompletion(progress, record({
+        sessionId: `original-${number}`, appId: 'shopping',
+        modeId: number === 5 ? 'multiplication-count' : number === 6 ? 'multiplication-money' : 'standard',
+        stageId: `shopping:quest-0${number}`, questionCount: number >= 5 ? 3 : 2,
+        firstCorrectCount: number >= 5 ? 3 : 2,
+      }))
+    }
+    saveProgress(progress, storage)
+    const loaded = loadProgress(storage)
+    expect(loaded.storageStatus).toBe('ready')
+    expect(loaded.progress).toEqual(progress)
+    const newQuest = record({ sessionId: 'new-15', appId: 'shopping', modeId: 'multiplication-count', stageId: 'shopping:quest-15', questionCount: 3, firstCorrectCount: 3 })
+    progress = addCompletion(loaded.progress, newQuest)
+    expect(progress.rewards.stamp).toEqual([...loaded.progress.rewards.stamp, 'stamp:quest-15'])
+    expect(addCompletion(progress, { ...newQuest, sessionId: 'replay-15' }).rewards.stamp).toHaveLength(7)
+    expect(validateCompletionRecord({ ...newQuest, stageId: 'shopping:quest-16' })).toBe(false)
+    saveProgress(progress, storage)
+    expect(loadProgress(storage)).toEqual({ progress, storageStatus: 'ready' })
   })
 })

@@ -9,12 +9,14 @@ Import `CATALOG`, `findCatalogEntry(record)`, `getReward(record)`, and `validate
 | appId | modeId | stageId | questionCount | reward |
 | --- | --- | --- | ---: | --- |
 | `monsters` | `kuku` | `monsters:dan-1` … `monsters:dan-9` | 9 | `monster:dan-N` |
-| `shopping` | `standard` | `shopping:quest-01` … `shopping:quest-04` | 2 numeric answers | `stamp:quest-NN` |
-| `shopping` | `multiplication-count` | `shopping:quest-05` | 3 numeric answers | `stamp:quest-05` |
-| `shopping` | `multiplication-money` | `shopping:quest-06` | 3 numeric answers | `stamp:quest-06` |
+| `shopping` | `standard` | `shopping:quest-01` … `shopping:quest-04`, `07`, `08`, `11` | 2 numeric answers | `stamp:quest-NN` |
+| `shopping` | `multiplication-count` | `shopping:quest-05`, `09`, `12`, `15` | 3 numeric answers | `stamp:quest-NN` |
+| `shopping` | `multiplication-money` | `shopping:quest-06`, `10`, `13`, `14` | 3 numeric answers | `stamp:quest-NN` |
 | `kanji` | `standard` | `kanji:g2-01` … `g2-04`, `kanji:g3-01` … `g3-04` | 5 | `treasure:gN-NN` |
 | `kanji` | `reading-difference` | `kanji:reading-difference-01` | 5 sentences | `treasure:reading-difference-01` |
 | `calculation` | `addition`, `subtraction`, `multiplication` | `calculation:{operation}-{size}` | size | none |
+
+The shopping catalog contains 15 quests. Existing quest IDs, modes, numeric question counts, and stamp IDs for quests 01–06 remain unchanged; version 1 progress stays compatible.
 
 Calculation size is `10 | 25 | 100`. `questionCount` means cells for calculation, and first-attempt correct cells. Other apps count questions; shopping excludes item-selection edits and counts numeric-answer questions. Reading-difference counts a sentence correct only when both blanks were correct on its first check.
 
