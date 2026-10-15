@@ -219,7 +219,7 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 ## T4: 基本編30問と図形の説明
 
-- state: pending
+- state: validated
 - owning Phase: P2
 - dependencies: T1, T2, T3
 - 所有範囲：`data/match.ts`、`data/index.ts`の基本部分、`domain/content.test.ts`の基本部分、`docs/reviews/geometry-content.md`の基本30問。
@@ -231,7 +231,7 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 ## T5: 応用編15問と全輪郭の正解
 
-- state: pending
+- state: validated
 - owning Phase: P2
 - dependencies: T1, T2, T3, T4（取得API・共通検証ファイルを引き継ぐ）
 - 所有範囲：`data/count.ts`、`data/index.ts`の応用部分、`domain/content.test.ts`の応用部分、教材確認記録の応用15問。
@@ -348,6 +348,8 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 | 2026-10-15T14:54:47+09:00 | session-mode決定 | per-phase。P=4、T=10、P>=4の基準とPhaseごとの契約・教材検証の引き継ぎを理由に推奨し、ユーザーが「per-phaseで」と決定。各Phaseの必須ローカルコミットと各実装セッション開始時のクリーンな作業ツリー要件を説明済み | human:user |
 | 2026-10-15T15:30:03+09:00 | session-mode確認 | 明示指定のper-phaseでP1を開始。作業ツリーはクリーン、baselineはnone。各Phase検証PASS後にローカルコミットする | human:user / implementation-session |
 
+| 2026-10-15T15:59:25+09:00 | session-mode再開確認 | 明示指定のper-phaseでP2を再開。Decision Log・P1 Handoffを読了し、クリーンな作業ツリーとbaseline noneを確認 | human:user / implementation-session |
+
 # Plan Change Log
 
 | 日時 | 種別 | 内容・影響 | 根拠 |
@@ -362,6 +364,28 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 | 2026-10-15T15:45:33+09:00 | EXECUTION_UPDATE | P1再検証PASSでvalidated。P2の依存を解除し、per-phase境界で停止。意味内容の計画変更なし | bun run typecheck PASS、domain+progress 4ファイル23件PASS。独立実行でvertexMap・内部禁止三角形・36頂点上限・円接触と分離もPASS |
 
+| 2026-10-15T15:59:25+09:00 | EXECUTION_UPDATE | P1境界コミット0b6c11dを記録しP2・T4をin_progressに変更。P1のattemptsを維持 | stable仕様・現行PlanレビューPASS・前回Handoff・クリーン状態を確認。ローカルOKF規約は欠落のためPlanに記載されたグローバル同一規約を読了 |
+
+| 2026-10-15T16:04:11+09:00 | EXECUTION_UPDATE | T4実装完了、implementedに変更してfresh task_validatorへ委譲 | 基本30問・取得API・教材記録・内容2テストを追加。実装者の型検査と指定テストPASS |
+
+| 2026-10-15T16:05:40+09:00 | EXECUTION_UPDATE | T4独立検証PASSでvalidated、依存解除したT5をin_progressに変更 | fresh task_validatorが基本30問の合同一意性・分類・枠・説明・取得APIを確認。内容2テストと型検査PASS |
+
+| 2026-10-15T16:11:21+09:00 | EXECUTION_UPDATE | T5実装完了、implementedに変更して独立検証へ | 応用15問・9ステージAPI・教材確認記録を追加。実装者はgeometry15テスト・型検査PASS。途中レビューで複合図の連結、格子の辺、解集合、円の正数と0個を修正 |
+
+| 2026-10-15T16:12:50+09:00 | EXECUTION_UPDATE | T5独立検証FAIL、局所修正のため再開 | geometry15テスト・型検査はPASSだが、正解前ヒントの個数露出、包含条件のヒント不足、intro:q03教材記録の内訳誤記を検出。各同一原因1回 |
+
+| 2026-10-15T16:14:59+09:00 | EXECUTION_UPDATE | T5局所補正完了、implementedに戻してfresh task_validatorで再検証 | 個数ヒントを除去、包含条件を開始説明・ヒント・解説に補充、教材記録を訂正。カタログ対応と45ID一意性を追加、geometry15テスト・型検査PASS |
+
+| 2026-10-15T16:16:17+09:00 | EXECUTION_UPDATE | T5再検証PASSでvalidated。P2全TaskがvalidatedとなりPhase統合検証へ | fresh task_validatorでgeometry4ファイル15テスト・型検査PASS。個数ヒント・包含説明・教材記録の補正を確認。各attemptsは1を維持 |
+
+| 2026-10-15T16:18:48+09:00 | EXECUTION_UPDATE | P2検証FAIL_LOCAL、T5を再開。T5-overlap-rule-copyを2に更新 | Phase検証の型検査・geometry15テスト・全30問の独立変換・15問の手作業個数照合はPASS。composite:q03/q05・mixed:q02/q04のヒントに直角二等辺の包含規則が不足 |
+
+| 2026-10-15T16:20:09+09:00 | EXECUTION_UPDATE | P2指摘の4ヒントを補正しT5をimplementedに変更 | 直角二等辺を対象種別として数える規則を明示。包含に該当する全7問のヒント回帰を追加。実装者のgeometry15テスト・型検査PASS |
+
+| 2026-10-15T16:21:53+09:00 | EXECUTION_UPDATE | T5最終局所補正をfresh task_validatorがPASS、validatedに戻しP2再検証へ | 全7問の包含ヒント・個数非公開・15問の手作業期待個数を確認、geometry15テスト・型検査PASS。過去の未コミット版差分は確認不能のため現在の全解集合照合で検証 |
+
+| 2026-10-15T16:24:31+09:00 | EXECUTION_UPDATE | P2再検証PASSでvalidated。P3の依存解除、per-phase境界で停止 | 型検査・geometry4ファイル15テストPASS。別計算で基本30/30合同、手作業で応用15/15個数・内訳一致。全7問の包含ヒントを確認、意味内容のPlan変更なし |
+
 # Execution State
 
 - session-mode: per-phase
@@ -370,8 +394,8 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 | Phase | state | commit | attempts |
 | --- | --- | --- | --- |
-| P1 | validated | 次回EXECUTION_UPDATEで記録（本Handoffを含むPhaseコミット） | {T3-test-tuple-type: 1, T2-contour-tolerance-key: 1} |
-| P2 | pending | n/a | {} |
+| P1 | validated | 0b6c11d14d49485c49eea9bcd025842bd1c14f4a | {T3-test-tuple-type: 1, T2-contour-tolerance-key: 1} |
+| P2 | validated | 次回EXECUTION_UPDATEで記録（本Handoffを含むPhaseコミット） | {T5-answer-hint-leak: 1, T5-overlap-rule-copy: 2, T5-review-record-mismatch: 1} |
 | P3 | pending | n/a | {} |
 | P4 | pending | n/a | {} |
 
@@ -388,6 +412,15 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 - T2補正検証：fresh task_validator PASS。`sameBoundary` / `sameSolution`で位置を保ったEPS比較を用い、巡回・逆順と浮動小数誤差を許容する。π回転と丸め境界の回帰追加後、domain12件・型検査PASS。補正検証中の一時コマンドに構文エラー1回があり、証拠に用いず、ファイル変更なし。
 
+## Task Validation Evidence（P2）
+
+| Task | 実装・独立検証 | 実行結果と証拠 |
+| --- | --- | --- |
+| T4 | implementer → fresh task_validator: PASS | `bun run test -- src/apps/geometry/domain/content.test.ts` 2件PASS、`bun run typecheck` PASS。30問・4択・合同一意性・大きさ違い・回転・分類・共通枠・説明・取得APIを確認。実表示確認はP4。 |
+| T5 | implementer補正 → fresh task_validator: PASS | `bun run test -- src/apps/geometry` 4ファイル15件PASS、`bun run typecheck` PASS。15問の全輪郭・禁止三角形・6題材・3難易度・円の正数/0・包含条件・回転・9ステージとカタログ・45IDを確認。初回FAILの個数露出・包含ヒント・教材記録を修正し再検証PASS。実表示はP4。 |
+
+- P2局所補正の最終Task検証：Phase検証で不足した4問の包含ヒントを補充し、全7問の必須包含ヒントを回帰確認。fresh task_validator PASS、geometry15テスト・型検査PASS。手作業個数列は `1,0,1,2,1 / 5,3,2,2,2 / 1,2,1,2,1`。T5-overlap-rule-copyは2を維持。
+
 # Phase Handoff
 
 <!-- Appended by implementation-session after each Phase is validated; append-only.
@@ -403,9 +436,19 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 - Validation notes: `bun run typecheck` PASS。`bun run test -- src/apps/geometry/domain src/shared/progress` 4ファイル23件PASS。独立反例のπ回転と丸め境界は回帰追加済み。P2で型検査とgeometry関連テストを再実行。全体テスト・ビルド・E2EはP1の必須確認に含まれず未実施。作業中に現れたbash.exe.stackdumpは成果物に含めない。
 - Commit: 本エントリーを含むP1境界コミットを直後に作成。ハッシュは次回開始時のEXECUTION_UPDATEでgit履歴から記録し、amendしない。
 
+## Handoff: P2 — 2026-10-15T16:24:31+09:00
+
+- Decisions: T4・T5を実装、独立Task検証とPhase再検証PASS。session-modeはper-phase、baselineはnone。T5の正解前個数ヒント・包含規則不足・教材記録を局所補正。仕様と計画の意味内容の変更はnone。
+- Interfaces: `data/match.ts`の`MATCH_QUESTIONS`（30問）と`MATCH_VIEWBOX={minX:-6,maxX:6,minY:-6,maxY:6}`、`data/count.ts`の`COUNT_QUESTIONS`（15問）。`data/index.ts`の`GEOMETRY_STAGES`はmanifest順の9件、`getGeometryStage(stageId)`は該当ステージまたはundefined。`GeometryStage`は`MatchStage | CountStage`の判別共用体でmode=`match`/`count`に応じたquestions（固定順5問）を返す。共通キーはid/title/description/cardDescription。descriptionには応用の包含規則があるためP3の開始説明に反映する。
+- Constraints discovered: 基本の見本と候補は全て同じ[-6,6]座標枠で描画し、個別の自動フィットをしない。円以外の正誤候補とも回転がある。候補IDは正誤を示さないoption形式。応用図は負座標（共有辺の上下正三角形）を含む。円の正解はcircleId参照でintro:q05、0個はintro:q02。正解数・breakdown・explanationは正解前に表示せず、hintだけを誤答時に使う。包含に該当する全7問はhintにも規則を明示する。
+- Open risks: 実表示での共通尺度・小画面のサイズ差の読み取り・全45問目視・アクセシビリティ・保存共存のブラウザー検証は未実施、P3/P4で確認。混在ステージは単純な対角線付き正方形を複数問で使うが承認済みの構造要件は満たす。P1の独立一時検証の一部は引き続き未固定。その他の未解決不具合はnone。
+- Deferred: P3=T6/T7/T8の描画・進行・入力・解説、P4=T9/T10の入口・全問実操作・教材目視・保存互換性・全体回帰。全体テスト・ビルド・E2E・Final Evaluationは計画どおり後続へ。
+- Validation notes: `bun run typecheck` PASS、`bun run test -- src/apps/geometry` 4ファイル15テストPASS。独立Phase検証の別実装の点集合・回転計算で基本30/30一致、応用15問の手作業の個数・内訳照合15/15一致（`1,0,1,2,1 / 5,3,2,2,2 / 1,2,1,2,1`）。T5初回Task FAILとP2初回FAIL_LOCALは補正し再検証PASS、attemptsは`T5-answer-hint-leak:1, T5-overlap-rule-copy:2, T5-review-record-mismatch:1`を維持。P1の既存domain/progress変更なし。P3では型検査・geometry/interactionテスト・ビルドを行う。
+- Commit: 本エントリーを含むP2境界コミットを直後に作成。ハッシュは次回開始時のEXECUTION_UPDATEでgit履歴から記録し、amendしない。
+
 # Final Evaluation
 
-- P1は実装・独立Task検証・Phase検証PASS。P2〜P4はpending。Planはdraftを維持し、最終評価は最終Phase後に実施する。
+- P1・P2は実装・独立Task検証・Phase検証PASS。P3・P4はpending。Planはdraftを維持し、最終評価は最終Phase後に実施する。P2は基本30問・応用15問と取得API、内容テスト、日本語教材確認記録の下書きを追加。意味内容のPlan変更なし。
 - 計画の独立レビュー：2026-10-15T14:58:17+09:00に、現行の意味内容の版（generated.at: 2026-10-15T14:57:46+09:00）でPASS。初回の軽微な実行順図の指摘を修正し、再確認でもPASS。未解決の指摘・仕様変更要求・免除した指摘はない。
 - 検証actorは実際にレビューした環境のplan_reviewer/gpt-6-astraとして記録する。Planのライフサイクルは実装と最終評価が完了するまでdraftのまま。
 - 残る実装上のリスクは数値比較・全輪郭列挙・画面境界での入力処理。対応するテストと全問の表示確認は計画済みで、実行結果は実装段階で評価する。
