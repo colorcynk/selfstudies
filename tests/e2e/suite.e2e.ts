@@ -2,18 +2,19 @@ import { expect, test } from '@playwright/test'
 import { SHOPPING_QUESTS } from '../../src/apps/shopping/data/quests'
 import { NORMAL_STAGES } from '../../src/apps/kanji/data/normal'
 import { READING_DIFFERENCE_SENTENCES } from '../../src/apps/kanji/data/readingDifference'
+import { GEOMETRY_STAGES } from '../../src/apps/geometry/data'
 import { STORAGE_KEY } from '../../src/shared/progress/types'
 import { CATALOG } from '../../src/shared/progress/catalog'
 import { completeDifference, completeKanji, enterNumber, finishCalc, finishMonster, finishShopping, gameButton, go } from './helpers'
 
 test('B1 routes, browser history and direct URLs', async ({ page }) => {
   await go(page)
-  for (const [route, title] of [['/monsters','九九モンスター'], ['/shopping','おかいものクエスト'], ['/kanji','かん字たんけん隊'], ['/calculation','100ます計算']] as const) {
+  for (const [route, title] of [['/monsters','九九モンスター'], ['/shopping','おかいものクエスト'], ['/kanji','かん字たんけん隊'], ['/calculation','100ます計算'], ['/geometry','ずけいたんけん']] as const) {
     await page.getByRole('button', { name: new RegExp(title) }).click()
     await expect(page).toHaveURL(new RegExp(`#${route}$`))
-    await expect(page.getByRole('heading', { name: title })).toBeVisible()
+    await expect(page.getByRole('heading', { name: title, level: 1 })).toBeVisible()
     await page.goBack(); await expect(page.getByRole('heading', { name: /なにしてあそぶ/ })).toBeVisible()
-    await page.goForward(); await expect(page.getByRole('heading', { name: title })).toBeVisible()
+    await page.goForward(); await expect(page.getByRole('heading', { name: title, level: 1 })).toBeVisible()
     await go(page)
   }
   await go(page, '/settings'); await expect(page.getByRole('heading', { name: 'おうちの人の設定' })).toBeVisible()
@@ -133,8 +134,12 @@ test('B12 production catalog agrees with actual content fixtures and completion 
     { appId: 'kanji', modeId: 'reading-difference', stageId: 'kanji:reading-difference-01', questionCount: READING_DIFFERENCE_SENTENCES.length },
     ...(['addition','subtraction','multiplication'] as const).flatMap(operation => ([10,25,100] as const).map(size => ({ appId: 'calculation', modeId: operation, stageId: `calculation:${operation}-${size}`, questionCount: size }))),
   ]
+  const geometry = GEOMETRY_STAGES.map(stage => ({ appId: 'geometry', modeId: stage.mode === 'match' ? 'geometry-match' : 'geometry-count', stageId: stage.id, questionCount: 5 }))
   expect(actual).toHaveLength(42)
-  expect(CATALOG.map(({ appId, modeId, stageId, questionCount }) => ({ appId, modeId, stageId, questionCount }))).toEqual(actual)
+  const existingCatalog = CATALOG.filter(entry => entry.appId !== 'geometry').map(({ appId, modeId, stageId, questionCount }) => ({ appId, modeId, stageId, questionCount }))
+  expect(existingCatalog).toEqual(actual)
+  expect(CATALOG.map(({ appId, modeId, stageId, questionCount }) => ({ appId, modeId, stageId, questionCount }))).toEqual([...actual, ...geometry])
+  expect(CATALOG).toHaveLength(51)
   expect(new Set(CATALOG.filter(entry => entry.appId === 'kanji').map(entry => entry.reward?.id)).size).toBe(9)
   await finishShopping(page, 5)
   await finishCalc(page, 'multiplication', 10)

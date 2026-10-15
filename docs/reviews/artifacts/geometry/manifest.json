@@ -1,0 +1,374 @@
+{
+  "generatedAt": "2026-10-15T23:09:59.000Z",
+  "questions": [
+    {
+      "id": "geometry:match-circle:q01",
+      "mode": "match",
+      "question": "geometry-match-circle-q01-question.png",
+      "explanation": "geometry-match-circle-q01-explanation.png",
+      "answer": "option-geometry:match-circle:q01-1"
+    },
+    {
+      "id": "geometry:match-circle:q02",
+      "mode": "match",
+      "question": "geometry-match-circle-q02-question.png",
+      "explanation": "geometry-match-circle-q02-explanation.png",
+      "answer": "option-geometry:match-circle:q02-2"
+    },
+    {
+      "id": "geometry:match-circle:q03",
+      "mode": "match",
+      "question": "geometry-match-circle-q03-question.png",
+      "explanation": "geometry-match-circle-q03-explanation.png",
+      "answer": "option-geometry:match-circle:q03-3"
+    },
+    {
+      "id": "geometry:match-circle:q04",
+      "mode": "match",
+      "question": "geometry-match-circle-q04-question.png",
+      "explanation": "geometry-match-circle-q04-explanation.png",
+      "answer": "option-geometry:match-circle:q04-4"
+    },
+    {
+      "id": "geometry:match-circle:q05",
+      "mode": "match",
+      "question": "geometry-match-circle-q05-question.png",
+      "explanation": "geometry-match-circle-q05-explanation.png",
+      "answer": "option-geometry:match-circle:q05-1"
+    },
+    {
+      "id": "geometry:match-square:q01",
+      "mode": "match",
+      "question": "geometry-match-square-q01-question.png",
+      "explanation": "geometry-match-square-q01-explanation.png",
+      "answer": "option-geometry:match-square:q01-2"
+    },
+    {
+      "id": "geometry:match-square:q02",
+      "mode": "match",
+      "question": "geometry-match-square-q02-question.png",
+      "explanation": "geometry-match-square-q02-explanation.png",
+      "answer": "option-geometry:match-square:q02-3"
+    },
+    {
+      "id": "geometry:match-square:q03",
+      "mode": "match",
+      "question": "geometry-match-square-q03-question.png",
+      "explanation": "geometry-match-square-q03-explanation.png",
+      "answer": "option-geometry:match-square:q03-4"
+    },
+    {
+      "id": "geometry:match-square:q04",
+      "mode": "match",
+      "question": "geometry-match-square-q04-question.png",
+      "explanation": "geometry-match-square-q04-explanation.png",
+      "answer": "option-geometry:match-square:q04-1"
+    },
+    {
+      "id": "geometry:match-square:q05",
+      "mode": "match",
+      "question": "geometry-match-square-q05-question.png",
+      "explanation": "geometry-match-square-q05-explanation.png",
+      "answer": "option-geometry:match-square:q05-2"
+    },
+    {
+      "id": "geometry:match-rectangle:q01",
+      "mode": "match",
+      "question": "geometry-match-rectangle-q01-question.png",
+      "explanation": "geometry-match-rectangle-q01-explanation.png",
+      "answer": "option-geometry:match-rectangle:q01-3"
+    },
+    {
+      "id": "geometry:match-rectangle:q02",
+      "mode": "match",
+      "question": "geometry-match-rectangle-q02-question.png",
+      "explanation": "geometry-match-rectangle-q02-explanation.png",
+      "answer": "option-geometry:match-rectangle:q02-4"
+    },
+    {
+      "id": "geometry:match-rectangle:q03",
+      "mode": "match",
+      "question": "geometry-match-rectangle-q03-question.png",
+      "explanation": "geometry-match-rectangle-q03-explanation.png",
+      "answer": "option-geometry:match-rectangle:q03-1"
+    },
+    {
+      "id": "geometry:match-rectangle:q04",
+      "mode": "match",
+      "question": "geometry-match-rectangle-q04-question.png",
+      "explanation": "geometry-match-rectangle-q04-explanation.png",
+      "answer": "option-geometry:match-rectangle:q04-2"
+    },
+    {
+      "id": "geometry:match-rectangle:q05",
+      "mode": "match",
+      "question": "geometry-match-rectangle-q05-question.png",
+      "explanation": "geometry-match-rectangle-q05-explanation.png",
+      "answer": "option-geometry:match-rectangle:q05-3"
+    },
+    {
+      "id": "geometry:match-equilateral:q01",
+      "mode": "match",
+      "question": "geometry-match-equilateral-q01-question.png",
+      "explanation": "geometry-match-equilateral-q01-explanation.png",
+      "answer": "option-geometry:match-equilateral:q01-4"
+    },
+    {
+      "id": "geometry:match-equilateral:q02",
+      "mode": "match",
+      "question": "geometry-match-equilateral-q02-question.png",
+      "explanation": "geometry-match-equilateral-q02-explanation.png",
+      "answer": "option-geometry:match-equilateral:q02-1"
+    },
+    {
+      "id": "geometry:match-equilateral:q03",
+      "mode": "match",
+      "question": "geometry-match-equilateral-q03-question.png",
+      "explanation": "geometry-match-equilateral-q03-explanation.png",
+      "answer": "option-geometry:match-equilateral:q03-2"
+    },
+    {
+      "id": "geometry:match-equilateral:q04",
+      "mode": "match",
+      "question": "geometry-match-equilateral-q04-question.png",
+      "explanation": "geometry-match-equilateral-q04-explanation.png",
+      "answer": "option-geometry:match-equilateral:q04-3"
+    },
+    {
+      "id": "geometry:match-equilateral:q05",
+      "mode": "match",
+      "question": "geometry-match-equilateral-q05-question.png",
+      "explanation": "geometry-match-equilateral-q05-explanation.png",
+      "answer": "option-geometry:match-equilateral:q05-4"
+    },
+    {
+      "id": "geometry:match-isosceles:q01",
+      "mode": "match",
+      "question": "geometry-match-isosceles-q01-question.png",
+      "explanation": "geometry-match-isosceles-q01-explanation.png",
+      "answer": "option-geometry:match-isosceles:q01-1"
+    },
+    {
+      "id": "geometry:match-isosceles:q02",
+      "mode": "match",
+      "question": "geometry-match-isosceles-q02-question.png",
+      "explanation": "geometry-match-isosceles-q02-explanation.png",
+      "answer": "option-geometry:match-isosceles:q02-2"
+    },
+    {
+      "id": "geometry:match-isosceles:q03",
+      "mode": "match",
+      "question": "geometry-match-isosceles-q03-question.png",
+      "explanation": "geometry-match-isosceles-q03-explanation.png",
+      "answer": "option-geometry:match-isosceles:q03-3"
+    },
+    {
+      "id": "geometry:match-isosceles:q04",
+      "mode": "match",
+      "question": "geometry-match-isosceles-q04-question.png",
+      "explanation": "geometry-match-isosceles-q04-explanation.png",
+      "answer": "option-geometry:match-isosceles:q04-4"
+    },
+    {
+      "id": "geometry:match-isosceles:q05",
+      "mode": "match",
+      "question": "geometry-match-isosceles-q05-question.png",
+      "explanation": "geometry-match-isosceles-q05-explanation.png",
+      "answer": "option-geometry:match-isosceles:q05-1"
+    },
+    {
+      "id": "geometry:match-right-triangle:q01",
+      "mode": "match",
+      "question": "geometry-match-right-triangle-q01-question.png",
+      "explanation": "geometry-match-right-triangle-q01-explanation.png",
+      "answer": "option-geometry:match-right-triangle:q01-2"
+    },
+    {
+      "id": "geometry:match-right-triangle:q02",
+      "mode": "match",
+      "question": "geometry-match-right-triangle-q02-question.png",
+      "explanation": "geometry-match-right-triangle-q02-explanation.png",
+      "answer": "option-geometry:match-right-triangle:q02-3"
+    },
+    {
+      "id": "geometry:match-right-triangle:q03",
+      "mode": "match",
+      "question": "geometry-match-right-triangle-q03-question.png",
+      "explanation": "geometry-match-right-triangle-q03-explanation.png",
+      "answer": "option-geometry:match-right-triangle:q03-4"
+    },
+    {
+      "id": "geometry:match-right-triangle:q04",
+      "mode": "match",
+      "question": "geometry-match-right-triangle-q04-question.png",
+      "explanation": "geometry-match-right-triangle-q04-explanation.png",
+      "answer": "option-geometry:match-right-triangle:q04-1"
+    },
+    {
+      "id": "geometry:match-right-triangle:q05",
+      "mode": "match",
+      "question": "geometry-match-right-triangle-q05-question.png",
+      "explanation": "geometry-match-right-triangle-q05-explanation.png",
+      "answer": "option-geometry:match-right-triangle:q05-2"
+    },
+    {
+      "id": "geometry:count-intro:q01",
+      "mode": "count",
+      "question": "geometry-count-intro-q01-question.png",
+      "explanation": "geometry-count-intro-q01-explanation.png",
+      "contours": [
+        "geometry-count-intro-q01-contour-1.png"
+      ],
+      "answer": 1
+    },
+    {
+      "id": "geometry:count-intro:q02",
+      "mode": "count",
+      "question": "geometry-count-intro-q02-question.png",
+      "explanation": "geometry-count-intro-q02-explanation.png",
+      "answer": 0
+    },
+    {
+      "id": "geometry:count-intro:q03",
+      "mode": "count",
+      "question": "geometry-count-intro-q03-question.png",
+      "explanation": "geometry-count-intro-q03-explanation.png",
+      "contours": [
+        "geometry-count-intro-q03-contour-1.png"
+      ],
+      "answer": 1
+    },
+    {
+      "id": "geometry:count-intro:q04",
+      "mode": "count",
+      "question": "geometry-count-intro-q04-question.png",
+      "explanation": "geometry-count-intro-q04-explanation.png",
+      "contours": [
+        "geometry-count-intro-q04-contour-1.png",
+        "geometry-count-intro-q04-contour-2.png"
+      ],
+      "answer": 2
+    },
+    {
+      "id": "geometry:count-intro:q05",
+      "mode": "count",
+      "question": "geometry-count-intro-q05-question.png",
+      "explanation": "geometry-count-intro-q05-explanation.png",
+      "contours": [
+        "geometry-count-intro-q05-contour-1.png"
+      ],
+      "answer": 1
+    },
+    {
+      "id": "geometry:count-composite:q01",
+      "mode": "count",
+      "question": "geometry-count-composite-q01-question.png",
+      "explanation": "geometry-count-composite-q01-explanation.png",
+      "contours": [
+        "geometry-count-composite-q01-contour-1.png",
+        "geometry-count-composite-q01-contour-2.png",
+        "geometry-count-composite-q01-contour-3.png",
+        "geometry-count-composite-q01-contour-4.png",
+        "geometry-count-composite-q01-contour-5.png"
+      ],
+      "answer": 5
+    },
+    {
+      "id": "geometry:count-composite:q02",
+      "mode": "count",
+      "question": "geometry-count-composite-q02-question.png",
+      "explanation": "geometry-count-composite-q02-explanation.png",
+      "contours": [
+        "geometry-count-composite-q02-contour-1.png",
+        "geometry-count-composite-q02-contour-2.png",
+        "geometry-count-composite-q02-contour-3.png"
+      ],
+      "answer": 3
+    },
+    {
+      "id": "geometry:count-composite:q03",
+      "mode": "count",
+      "question": "geometry-count-composite-q03-question.png",
+      "explanation": "geometry-count-composite-q03-explanation.png",
+      "contours": [
+        "geometry-count-composite-q03-contour-1.png",
+        "geometry-count-composite-q03-contour-2.png"
+      ],
+      "answer": 2
+    },
+    {
+      "id": "geometry:count-composite:q04",
+      "mode": "count",
+      "question": "geometry-count-composite-q04-question.png",
+      "explanation": "geometry-count-composite-q04-explanation.png",
+      "contours": [
+        "geometry-count-composite-q04-contour-1.png",
+        "geometry-count-composite-q04-contour-2.png"
+      ],
+      "answer": 2
+    },
+    {
+      "id": "geometry:count-composite:q05",
+      "mode": "count",
+      "question": "geometry-count-composite-q05-question.png",
+      "explanation": "geometry-count-composite-q05-explanation.png",
+      "contours": [
+        "geometry-count-composite-q05-contour-1.png",
+        "geometry-count-composite-q05-contour-2.png"
+      ],
+      "answer": 2
+    },
+    {
+      "id": "geometry:count-mixed:q01",
+      "mode": "count",
+      "question": "geometry-count-mixed-q01-question.png",
+      "explanation": "geometry-count-mixed-q01-explanation.png",
+      "contours": [
+        "geometry-count-mixed-q01-contour-1.png"
+      ],
+      "answer": 1
+    },
+    {
+      "id": "geometry:count-mixed:q02",
+      "mode": "count",
+      "question": "geometry-count-mixed-q02-question.png",
+      "explanation": "geometry-count-mixed-q02-explanation.png",
+      "contours": [
+        "geometry-count-mixed-q02-contour-1.png",
+        "geometry-count-mixed-q02-contour-2.png"
+      ],
+      "answer": 2
+    },
+    {
+      "id": "geometry:count-mixed:q03",
+      "mode": "count",
+      "question": "geometry-count-mixed-q03-question.png",
+      "explanation": "geometry-count-mixed-q03-explanation.png",
+      "contours": [
+        "geometry-count-mixed-q03-contour-1.png"
+      ],
+      "answer": 1
+    },
+    {
+      "id": "geometry:count-mixed:q04",
+      "mode": "count",
+      "question": "geometry-count-mixed-q04-question.png",
+      "explanation": "geometry-count-mixed-q04-explanation.png",
+      "contours": [
+        "geometry-count-mixed-q04-contour-1.png",
+        "geometry-count-mixed-q04-contour-2.png"
+      ],
+      "answer": 2
+    },
+    {
+      "id": "geometry:count-mixed:q05",
+      "mode": "count",
+      "question": "geometry-count-mixed-q05-question.png",
+      "explanation": "geometry-count-mixed-q05-explanation.png",
+      "contours": [
+        "geometry-count-mixed-q05-contour-1.png"
+      ],
+      "answer": 1
+    }
+  ]
+}

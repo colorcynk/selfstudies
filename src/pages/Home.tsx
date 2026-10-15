@@ -5,6 +5,7 @@ const games = [
   { path: '/shopping', title: 'おかいものクエスト', subtitle: 'おつりを計算して、おつかい名人！', icon: '▣', color: 'blueberry', tag: 'さんすう' },
   { path: '/kanji', title: 'かん字たんけん隊', subtitle: 'ことばの森で、かん字を見つけよう！', icon: '文', color: 'grape', tag: 'こくご' },
   { path: '/calculation', title: '100ます計算', subtitle: '自分のペースで、どんどんチャレンジ！', icon: '＋', color: 'leaf', tag: 'さんすう' },
+  { path: '/geometry', title: 'ずけいたんけん', subtitle: '形のひみつを見つけて、カードを集めよう！', icon: '◇', color: 'blueberry', tag: 'さんすう' },
 ]
 export default function Home() {
   const { progress } = useProgress()

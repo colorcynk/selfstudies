@@ -6,10 +6,11 @@ import Monsters from './apps/monsters'
 import Shopping from './apps/shopping'
 import Kanji from './apps/kanji'
 import Calculation from './apps/calculation'
+import Geometry from './apps/geometry'
 
 const routes: Record<string, ComponentType> = {
   '/': Home, '/monsters': Monsters, '/shopping': Shopping,
-  '/kanji': Kanji, '/calculation': Calculation, '/settings': Settings,
+  '/kanji': Kanji, '/calculation': Calculation, '/geometry': Geometry, '/settings': Settings,
 }
 function currentPath() {
   const path = window.location.hash.slice(1) || '/'

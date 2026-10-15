@@ -279,7 +279,7 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 ## T9: ホーム・ルートと保存共存の統合
 
-- state: pending
+- state: validated
 - owning Phase: P4
 - dependencies: T3, T7, T8
 - 所有範囲：`src/App.tsx`、`src/pages/Home.tsx`、`tests/e2e/suite.e2e.ts`、`tests/e2e/geometry.e2e.ts`のナビゲーション・保存部分、必要な`helpers.ts`の補助。
@@ -291,7 +291,7 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 ## T10: 全45問・操作・表示の受け入れ検証と文書
 
-- state: pending
+- state: validated
 - owning Phase: P4
 - dependencies: T1〜T9
 - 所有範囲：`tests/e2e/geometry.e2e.ts`の全問・操作部分、`geometry-accessibility.e2e.ts`、`geometry-content.e2e.ts`、必要なhelpers、`README.md`、`docs/reviews/{geometry-content,geometry-validation}.md`と専用artifacts。
@@ -351,6 +351,8 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 | 2026-10-15T15:59:25+09:00 | session-mode再開確認 | 明示指定のper-phaseでP2を再開。Decision Log・P1 Handoffを読了し、クリーンな作業ツリーとbaseline noneを確認 | human:user / implementation-session |
 
 | 2026-10-15T16:30:07+09:00 | session-mode再開確認 | 明示指定のper-phaseでP3を再開。Decision Log・最新P2 Handoff読了、作業ツリーはクリーン、baseline noneを確認 | human:user / implementation-session |
+
+| 2026-10-16T07:24:54+09:00 | session-mode再開確認 | 明示指定のper-phaseでP4を再開。Decision Log・最新P3 Handoff読了、作業ツリーはクリーン、baseline none | human:user / implementation-session |
 
 # Plan Change Log
 
@@ -416,6 +418,42 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 | 2026-10-15T17:02:52+09:00 | EXECUTION_UPDATE | P3最終再検証PASSでvalidated、P4依存解除。per-phase境界で停止 | 型検査・geometry/interaction6ファイル27テスト・ビルド・diff検査PASS。独立9ステージ45解説・誤答4/5・無効入力・再練習/放棄・9報酬IDを確認。意味内容のPlan変更なし |
 
+| 2026-10-16T07:24:54+09:00 | EXECUTION_UPDATE | P3境界コミット94c1c7203a17a3478e276a3b037664d6dc963fc3を記録、P4・T9をin_progressに変更。既存attemptsを保持 | stable仕様・現行PlanレビューPASS・最新Handoff・クリーン状態を確認。ローカル規約欠落につきPlan記載のグローバルOKF規約を読了 |
+
+| 2026-10-16T07:30:01+09:00 | EXECUTION_UPDATE | T9実装途中に環境再起動。型検査・progress11件はPASS、E2Eは中断し未完了。実装担当をfresh invocationで再開 | 残存previewを終了。geometry.e2eの一部失敗成果物あり、成功と見なさず原因と全必須確認を再実施する |
+
+| 2026-10-16T07:30:24+09:00 | EXECUTION_UPDATE | T9中断E2Eで曖昧な見出しlocatorと再読込後ルート期待値の誤りを確認、各同一原因1として記録 | 失敗error-contextを確認。UIの仕様を変えずテストを補正し、fresh implementerで必須確認を再実施 |
+
+| 2026-10-16T07:33:44+09:00 | EXECUTION_UPDATE | T9補正後E2Eでdirect-linkの最終見出しassertionに修正漏れ、同一原因カウンタを2に更新 | 保存関連6ケースはPASS。ナビゲーション全assertionを再点検し、必須E2Eを再実施する |
+
+| 2026-10-16T07:40:59+09:00 | EXECUTION_UPDATE | T9実装完了、implementedとしてfresh task_validatorへ | 型検査・progress11件PASS。指定E2Eは22成功/1見出し指定失敗、補正後その1件がPASS。途中の再起動・初回失敗も保持。ローカル公開導線・保存形式変更なしの共存テストを追加 |
+
+| 2026-10-16T07:42:59+09:00 | EXECUTION_UPDATE | T9独立検証PASSでvalidated、T10をin_progressに変更 | fresh task_validatorが実diffと23件初回ログ・補正ログを照合し、geometry7件を独立再実行して全PASS。E2E型検査・ビルドもPASS、保存共存・導線契約を確認 |
+
+| 2026-10-16T07:47:43+09:00 | EXECUTION_UPDATE | T10で円輪郭の強調CSS競合を検出、T6を局所補正のため再開 | 実stylesheetをChromiumで確認し、selected circleの塗り・線色・太さが通常circleと同じ。polygonのみ強調が適用。CSS優先順位の局所補正とT10実画面回帰を行う。計画の意味変更なし |
+
+| 2026-10-16T07:48:25+09:00 | EXECUTION_UPDATE | T6円強調CSS補正をimplementedとしてfresh Task検証へ | 円に限定した強調セレクターを追加、実装者のChromium computed-styleで選択円とpolygonの黄色塗り・茶線・0.14線幅の一致、通常円との違いを確認 |
+
+| 2026-10-16T07:49:24+09:00 | EXECUTION_UPDATE | T6円強調補正をfresh task_validatorがPASS、validatedに戻しT10検証を継続 | 独立Chromium fixtureで選択円・polygonの強調一致と通常円の保全を確認。型検査・ビルドPASS。実画面intro:q05回帰はT10で検証。カウンタ1を維持 |
+
+| 2026-10-16T07:54:09+09:00 | EXECUTION_UPDATE | 全45問の問題・解説と応用全輪郭のエージェント目視を完了、重大な表示不具合none | manifest対応PNGから9ステージ別一覧を作り原寸確認。基本30問の寸法差・輪郭・辺角印・説明、応用15問の手作業個数列と全選択輪郭を照合。人による承認ではない。正式Task検証・全体回帰は継続中 |
+
+| 2026-10-16T07:59:37+09:00 | EXECUTION_UPDATE | T10予備実行で全45問・基本30問×3幅・保存/主要操作はPASS、長押しテストのキー対象に誤りを検出 | textboxの次Tabが数字ボタンへ進んだため回答が送信されず失敗。テスト手順を補正し再確認、製品実装の仕様変更なし。T10-held-enter-targetを1で保持 |
+
+| 2026-10-16T08:01:25+09:00 | EXECUTION_UPDATE | T10の完了済み予備16件実行は14成功/2失敗。ヒントのrole期待値を補正し再実行 | 長押しのキー対象誤りに加え、誤答ヒントはstatusでなくnote。製品仕様を変えずテストを補正。初回探索実行は成功12件を観測したが終了サマリ未取得として制限を記録 |
+
+| 2026-10-16T08:03:12+09:00 | EXECUTION_UPDATE | T10の実ダブルクリックで最終結果が選択へ飛ぶ製品不具合、T7を局所補正のため再開 | 最終advanceの2回目nativeclickが切替後の結果ボタンへ届く。error-contextでselector遷移を確認。回答/advanceの旧callbackガードだけでは別要素への実クリックを防げない。テストを弱めずUI境界で補正する |
+
+| 2026-10-16T08:05:20+09:00 | EXECUTION_UPDATE | T7画面境界クリック補正をimplementedとしてfresh Task検証へ | nativeclickの初回画面IDを保持し、画面変更後のdetail>1だけcaptureで抑止。同一画面の数字・輪郭操作とdetail0のキーボードを維持。実装者の該当E2E1件・型検査PASS |
+
+| 2026-10-16T08:07:33+09:00 | EXECUTION_UPDATE | T7画面境界クリック補正をfresh task_validatorがPASS、validatedに戻しT10の最終全体検証へ | 独立E2E5件で数字11・輪郭1→3→1・キーボード・再試行・最終結果の二重クリックを確認。型検査・ビルド・diff検査PASS。rootの全Vitest11ファイル58件もPASS。カウンタ1保持 |
+
+| 2026-10-16T08:22:01+09:00 | EXECUTION_UPDATE | T10実装完了、implementedとしてfresh Task検証へ | 最終全体E2E59/59（12.1分、図形17件含む）、型検査・全Vitest58/58・ビルドPASS。専用134PNG・45ID manifest・HTML一覧・結果summary JSONと日本語文書を保存。予備失敗と中断・終了不明も明示 |
+
+| 2026-10-16T08:24:00+09:00 | EXECUTION_UPDATE | T10独立検証PASSでvalidated、P4全Task完了としてPhase統合検証へ | fresh task_validatorが実ファイル・全体ログ・45ID/116参照画像/134PNG/manifest SHAを照合。独立内容3テスト・Playwright6件もPASS。G1〜G11証拠、未解決none（実機/他ブラウザーは範囲外） |
+
+| 2026-10-16T08:26:25+09:00 | EXECUTION_UPDATE | P4 Phase独立検証PASSでvalidated、per-phase境界コミットとFinal Evaluationへ | fresh phase_validatorがF1〜F7/G1〜G11を確認。独立7ファイル38テスト・実E2E11件・本番ビルド・diff検査PASS。全体58unit/59E2Eログと45ID/134PNG/manifest SHAも照合。未解決none |
+
 # Execution State
 
 - session-mode: per-phase
@@ -426,8 +464,8 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 | --- | --- | --- | --- |
 | P1 | validated | 0b6c11d14d49485c49eea9bcd025842bd1c14f4a | {T3-test-tuple-type: 1, T2-contour-tolerance-key: 1} |
 | P2 | validated | f96f6f92d47826edcfa1dcbdcfffb12e82f25a96 | {T5-answer-hint-leak: 1, T5-overlap-rule-copy: 2, T5-review-record-mismatch: 1} |
-| P3 | validated | 次回EXECUTION_UPDATEで記録（本Handoffを含むPhaseコミット） | {T7-stale-run-test-fixture: 1, T6-circle-radius-diagram: 1, T7-card-feature-copy: 1} |
-| P4 | pending | n/a | {} |
+| P3 | validated | 94c1c7203a17a3478e276a3b037664d6dc963fc3 | {T7-stale-run-test-fixture: 1, T6-circle-radius-diagram: 1, T7-card-feature-copy: 1} |
+| P4 | validated | 次のEXECUTION_UPDATEで記録（本Handoffを含むPhaseコミット） | {T9-ambiguous-heading: 2, T9-reload-route-expectation: 1, T6-circle-highlight-specificity: 1, T10-held-enter-target: 1, T10-hint-feedback-role: 1, T7-cross-screen-native-doubleclick: 1} |
 
 ## Task Validation Evidence（P1）
 
@@ -469,6 +507,17 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 - P3最終Phase検証：fresh phase_validator PASS。`bun run typecheck`、`bun run test -- src/apps/geometry src/shared/interaction`（6ファイル27件）、`bun run build`、`git diff --check`は全てPASS。独立一時実行で9ステージ・45解説・誤答後4/5・不正入力無変更・再練習/放棄リセット・9報酬ID完全一致を確認。円の半径・カード特徴の2指摘は解消、未解決none。
 
+## Task Validation Evidence（P4）
+
+| Task | 実装・独立検証 | 実行結果と証拠 |
+| --- | --- | --- |
+| T9 | implementer補正 → fresh task_validator: PASS | 型検査・progress11件PASS。指定E2E初回22成功/1失敗、見出し指定補正後に該当1件PASS。独立validatorがgeometry7件を再実行してPASS。旧42件+9件・旧4ゲーム履歴/報酬/自己ベスト・漢字分離・途中再読込・未知版非上書き・保存不可・リセットを確認。 |
+| T10 | implementer → fresh task_validator: PASS | 型検査・全Vitest11ファイル58件・全E2E59件・ビルドPASS。独立validatorが内容3テスト・実E2E6件を再実行しPASS。全45問・応用全26輪郭・代表18枚のエージェント目視、全基本30問×3幅、保存/連打/入力/キー操作を確認。45IDと134PNG・manifest SHAの整合PASS。 |
+
+- P4で発見したT6局所補正：円のselected輪郭に限定したCSS優先順位を追加。fresh task_validatorの独立Chromium computed-style・型検査・ビルドPASS。T10の実画面intro:q05強調回帰も全体実行でPASS。
+- P4で発見したT7局所補正：初回nativeclickの画面IDと比較し、画面変更後の連続クリックだけ抑止。fresh task_validatorの実E2E5件・型検査・本番ビルドPASS。数字11入力・輪郭1→3→1・キーボード・再試行4/5・最終結果維持を確認。
+- 全45問の目視：主エージェントが375pxの問題・解説90枚と応用全26輪郭、3画面幅の代表18枚を確認。特徴印・重ね合わせ・個数/内訳・全輪郭・表示の重大不具合none。元画像134枚、45ID対応manifestとHTML一覧を専用artifactsへ保存。ユーザー/人による承認を意味しない。
+
 # Phase Handoff
 
 <!-- Appended by implementation-session after each Phase is validated; append-only.
@@ -504,10 +553,25 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 - Validation notes: 最終独立Phase検証で型検査・geometry/interaction27テスト・ビルド・diff検査PASS、9ステージ45解説の純粋遷移と再練習・放棄・9報酬IDを確認。補助fresh dev mountで基本誤答4/5・応用5/5・負数拒否・0個操作なし・輪郭2/2・代表3幅等寸・保存を確認。dev初回遅延と一時ハーネスの修正は証拠欄参照。検証ブラウザーとdevサーバーは終了済み。P4で全体typecheck/test/test:e2e/buildを実行する。attemptsはT7-stale-run-test-fixture:1、T6-circle-radius-diagram:1、T7-card-feature-copy:1を保持。
 - Commit: 本エントリーを含むP3境界コミットを直後に作成。ハッシュは次回開始時のEXECUTION_UPDATEでgit履歴から記録し、amendしない。
 
+## Handoff: P4 — 2026-10-16T08:26:25+09:00
+
+- Decisions: T9・T10を実装し独立Task/Phase検証PASS。P4で発見した円輪郭強調CSS（T6）と画面変更後のnative連続クリック（T7）を局所補正し、それぞれfresh Task検証PASS。session-modeはper-phase、baseline none。仕様・計画の意味内容の変更none。
+- Interfaces: ホーム5枚目から`#/geometry`へ既存Geometry default exportを登録。既存42件+図形9件のカタログ、保存キー/形式version 1を維持。`docs/reviews/artifacts/geometry/manifest.json`が全45IDの問題/解説/輪郭画像へ対応し、contact-sheet.htmlで一覧、validation-summary.jsonで検証結果を追跡できる。
+- Constraints discovered: SVGの円基本セレクターに対して選択円の強調セレクターを明示する。native二重クリックは切替後の別ボタンへ届くため、初回クリックの画面IDと比較し変更後のdetail>1だけcaptureで抑止する。同一画面の数字11や輪郭1→3→1とdetail0のキーボード操作を保全。元画像134枚は専用artifacts、既存レポート/旧画像の自動差分は成果物から除外。
+- Open risks: 承認済み範囲内の未解決none。ローカルPlaywright Chromiumでの確認に限り、実機/他ブラウザー/公開環境は未確認。目視はエージェントで、人によるレビューではない。P1一部の一時反例は恒久的な単体回帰に未固定（過去Handoff参照）。Final Evaluationで評価する。
+- Deferred: Final Evaluationのみを直後に実施。追加Phaseや計画外の延期none。デプロイ・push・公開は対象外で未実施。
+- Validation notes: 最新ソースで型検査・全Vitest11ファイル58件・全E2E59件（12.1分、失敗/skip0）・ビルドPASS。fresh T10 validatorは内容3テスト・E2E6件・画像参照/ハッシュを独立確認。fresh Phase validatorは7ファイル38テスト・E2E11件・本番ビルド・diff検査PASS。全45問/26輪郭/代表18枚の目視で重大表示不具合none。予備失敗・中断・終了不明は検証記録とsummaryに保持。attemptsはExecution Stateの値を維持。
+- Commit: 本エントリーを含むP4境界コミットを直後に作成。ハッシュは次のEXECUTION_UPDATEで記録し、amendしない。
+
 # Final Evaluation
 
-- P1・P2・P3は実装・独立Task検証・Phase検証PASS。P4はpending。Planはdraftを維持し、最終評価は最終Phase後に実施する。P3はgeometry配下の描画・解説5部品、ゲームindex、CSS、sessionと10テストの計9ファイルを追加し、Planの実行記録を更新。型検査・関連27テスト・ビルドPASS。円図・基本カード特徴表示は局所補正済み。意味内容のPlan変更なし。
-- 計画の独立レビュー：2026-10-15T14:58:17+09:00に、現行の意味内容の版（generated.at: 2026-10-15T14:57:46+09:00）でPASS。初回の軽微な実行順図の指摘を修正し、再確認でもPASS。未解決の指摘・仕様変更要求・免除した指摘はない。
-- 検証actorは実際にレビューした環境のplan_reviewer/gpt-6-astraとして記録する。Planのライフサイクルは実装と最終評価が完了するまでdraftのまま。
-- 残る実装上のリスクは数値比較・全輪郭列挙・画面境界での入力処理。対応するテストと全問の表示確認は計画済みで、実行結果は実装段階で評価する。
-- 最終評価ではF1〜F7とG1〜G11の証拠を確認し、失敗・未実施・制限を明示する。
+- 現在：Planはdraft。P1〜P4の全PhaseとT1〜T10の全Taskはvalidated。P4 Phase検証はPASS、Final Evaluationは直後に実施する。
+- 実装の最終差分：P1は幾何モデル・合同/包含分類・全輪郭検証と旧保存/9ステージ契約、P2は固定45問と教材記録、P3は描画・進行・両モード/解説/結果/カード帳、P4はホーム5枚目・`#/geometry`・受け入れE2E・README/検証記録・134PNG/manifest/HTML/summaryを追加。P4で円の輪郭強調CSS優先順位と画面境界のnative連続クリックを局所補正した。
+- 計画の意味内容の変更：none。安定した仕様の変更：none。現行の意味内容の版はgenerated.at: 2026-10-15T14:57:46+09:00で、plan_reviewer/gpt-6-astraが2026-10-15T14:58:17+09:00にPASS。実装時の変更は既存契約を満たす局所補正とEXECUTION_UPDATEのみ。
+- 最終全体確認：`bun run typecheck` PASS、`bun run test` 11ファイル58/58 PASS、`bun run test:e2e` Chromium59/59（12.1分、失敗0・skip0、図形17件を含む）PASS、`bun run build` Vite71モジュールPASS。T10のfresh task_validatorは内容3テスト・実E2E6件を独立再実行してPASS。T6/T7の補正もfresh Task検証PASS。
+- 教材の受け入れ証拠：基本30問×375/768/1280pxの共通尺度/比率/描画範囲/横はみ出しを自動確認。全45問を実画面から回答し毎問/最後の解説を経由。主エージェントが問題/解説90枚・全26輪郭・代表18枚を目視し重大表示不具合none。これは人によるレビューではない。
+- 保持された証跡：[教材確認](../reviews/geometry-content.md)、[検証記録](../reviews/geometry-validation.md)、[45問manifest](../reviews/artifacts/geometry/manifest.json)、[画像一覧](../reviews/artifacts/geometry/contact-sheet.html)、[最終結果summary](../reviews/artifacts/geometry/validation-summary.json)。一時ログは`/tmp/geometry-final-{typecheck,e2e,build}.log`と`/tmp/geometry-p4-unit.log`。予備実行の失敗/中断/終了不明を検証記録とsummaryに明示。
+- 既知の未解決事項：承認済み範囲内ではnone。実ブラウザー確認はローカルPlaywright Chromiumで、実機・他ブラウザー・公開環境・完全非視覚代替・複数タブ同時更新は保証対象外。独立一時検証の一部はP1 Handoff記載のとおり恒久的な単体回帰テストに未固定だが、幾何/教材テストと全問確認は成功。
+- 運用：保存キー/形式version 1を維持し移行不要。旧4ゲームの記録・報酬・自己ベストと共存。入口を止める切り戻しでは新カタログ/検証を保持し、旧コードで新データを削除/暗黙ダウングレードしない。デプロイ・外部通信・公開・pushは対象外で未実施。per-phaseのP4ローカルコミットはPhase PASS後に行う。
+
+- P4独立Phase検証：F1〜F7/G1〜G11と最終評価へ渡す証拠の追跡性はPASS。独立38 unit/11 E2E・ビルド・diff検査成功。未解決の統合不具合/契約違反none。

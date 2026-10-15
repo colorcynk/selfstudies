@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { KeyboardEvent, ReactNode } from 'react'
+import type { KeyboardEvent, MouseEvent, ReactNode } from 'react'
 import { Feedback, GameLayout } from '../../components'
 import { createSubmissionGuard, parseIntegerInput } from '../../shared/interaction/guard'
 import { useProgress } from '../../shared/progress'
@@ -37,6 +37,7 @@ export default function Geometry() {
   const guards = useRef(new Map<string, ReturnType<typeof createSubmissionGuard>>())
   const attemptTokens = useRef(new Map<string, number>())
   const heading = useRef<HTMLHeadingElement>(null)
+  const nativeClickScreen = useRef<string | null>(null)
   const [choice, setChoice] = useState<string | null>(null)
   const [countAnswer, setCountAnswer] = useState('')
   const [feedback, setFeedback] = useState('')
@@ -146,6 +147,24 @@ export default function Geometry() {
     if (!event.repeat && event.target instanceof HTMLButtonElement) event.target.click()
   }
 
+  const onScreenClickCapture = (event: MouseEvent<HTMLElement>) => {
+    // A native double-click may deliver its second click to a button that only
+    // appeared after the first click changed screens. Keep that click from
+    // activating the newly rendered screen.
+    if (event.detail === 1) {
+      const active = latest.current
+      nativeClickScreen.current = `${active.phase}:${active.sessionId ?? ''}:${active.stageId ?? ''}:${active.questionIds[active.questionIndex] ?? ''}`
+      return
+    }
+    if (event.detail > 1) {
+      const active = latest.current
+      const screen = `${active.phase}:${active.sessionId ?? ''}:${active.stageId ?? ''}:${active.questionIds[active.questionIndex] ?? ''}`
+      if (nativeClickScreen.current === screen) return
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }
+
   const owned = new Set(progress.rewards.treasure)
   const book = <section className="geometry-panel" aria-labelledby="geometry-book-title">
     <p className="geometry-kicker">あつめたカード</p><h2 id="geometry-book-title" ref={heading} tabIndex={-1}>はっけんカードちょう</h2>
@@ -214,6 +233,6 @@ export default function Geometry() {
   } else content = <section className="geometry-panel"><h2 ref={heading} tabIndex={-1}>ステージをえらんでね</h2></section>
 
   return <GameLayout title="ずけいたんけん" description="形のひみつを見つけよう！">
-    <div onKeyDown={onScreenKeyDown}>{content}</div>
+    <div onKeyDown={onScreenKeyDown} onClickCapture={onScreenClickCapture}>{content}</div>
   </GameLayout>
 }

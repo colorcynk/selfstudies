@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-10-16",
+  "feature": "geometry-games",
+  "task": "T10",
+  "runtime": {
+    "node": "24.18.0",
+    "bun": "1.3.14",
+    "playwright": "1.64.0",
+    "browser": "Playwright Chromium"
+  },
+  "finalChecks": [
+    {
+      "command": "bun run typecheck",
+      "status": "PASS",
+      "log": "/tmp/geometry-final-typecheck.log"
+    },
+    {
+      "command": "bun run test",
+      "status": "PASS",
+      "result": "11 test files, 58 tests passed",
+      "log": "/tmp/geometry-p4-unit.log"
+    },
+    {
+      "command": "bun run test:e2e",
+      "status": "PASS",
+      "result": "59 passed, 0 failed, 0 skipped; 12.1 minutes",
+      "log": "/tmp/geometry-final-e2e.log"
+    },
+    {
+      "command": "bun run build",
+      "status": "PASS",
+      "result": "Vite 6.3.5, 71 modules",
+      "log": "/tmp/geometry-final-build.log"
+    }
+  ],
+  "geometryEvidence": {
+    "stages": 9,
+    "questions": 45,
+    "basicScaleCases": 30,
+    "viewportWidths": [375, 768, 1280],
+    "screenshots": 134,
+    "artifactBytesApprox": 3145728,
+    "manifest": "manifest.json",
+    "contactSheet": "contact-sheet.html",
+    "manifestSha256": "603d8a983b86f49462082834a840503a2b245fb0a35698bf395ce8e351c18942"
+  },
+  "attemptHistory": [
+    {
+      "run": "initial full draft",
+      "status": "INTERRUPTED",
+      "result": "55 tests did not run; test suite stopped before execution"
+    },
+    {
+      "run": "early focused draft",
+      "status": "INCOMPLETE",
+      "result": "12 passed were observed in partial output, but no final exit summary was recoverable; completion status is unknown"
+    },
+    {
+      "run": "focused geometry revision 2",
+      "status": "FAILED",
+      "result": "14 passed, 2 failed; incorrect feedback role expectation and focus sent to the number pad"
+    },
+    {
+      "run": "focused geometry revision 3",
+      "status": "FAILED",
+      "result": "15 passed, 1 failed; a native final-answer double-click activated the result screen's stage-selection button"
+    },
+    {
+      "run": "T7 independent verification",
+      "status": "PASS",
+      "result": "5 actual UI tests, typecheck, production build"
+    },
+    {
+      "run": "final complete E2E",
+      "status": "PASS",
+      "result": "59 passed, 0 failed, 0 skipped"
+    }
+  ],
+  "visualReview": {
+    "status": "PASS",
+    "reviewer": "implementation agent",
+    "scope": "all 45 question and explanation images, all count contour images, and 18 representative images at three widths",
+    "limitations": "This was agent visual inspection, not independent human review or real-device validation."
+  }
+}
