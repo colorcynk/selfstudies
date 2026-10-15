@@ -243,7 +243,7 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 ## T6: 共通尺度のSVG描画と解説部品
 
-- state: pending
+- state: validated
 - owning Phase: P3
 - dependencies: T1, T4, T5
 - 所有範囲：`src/apps/geometry/components/{ShapeFigure,MatchExplanation,CountDiagram,CountExplanation}.tsx`、`styles.css`の図形・解説部分。
@@ -255,7 +255,7 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 ## T7: 共通進行・基本編・結果とカード帳
 
-- state: pending
+- state: validated
 - owning Phase: P3
 - dependencies: T2, T3, T4, T5, T6
 - 所有範囲：`domain/session.ts`・`session.test.ts`、`index.tsx`、必要な共通画面部品と`styles.css`の画面部分。
@@ -267,7 +267,7 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 ## T8: 応用編の入力・採点・輪郭解説の接続
 
-- state: pending
+- state: validated
 - owning Phase: P3
 - dependencies: T5, T6, T7
 - 所有範囲：`components/CountQuestion.tsx`、`index.tsx`と`styles.css`の応用接続部分、必要なsessionテスト。
@@ -350,6 +350,8 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 | 2026-10-15T15:59:25+09:00 | session-mode再開確認 | 明示指定のper-phaseでP2を再開。Decision Log・P1 Handoffを読了し、クリーンな作業ツリーとbaseline noneを確認 | human:user / implementation-session |
 
+| 2026-10-15T16:30:07+09:00 | session-mode再開確認 | 明示指定のper-phaseでP3を再開。Decision Log・最新P2 Handoff読了、作業ツリーはクリーン、baseline noneを確認 | human:user / implementation-session |
+
 # Plan Change Log
 
 | 日時 | 種別 | 内容・影響 | 根拠 |
@@ -386,6 +388,34 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 
 | 2026-10-15T16:24:31+09:00 | EXECUTION_UPDATE | P2再検証PASSでvalidated。P3の依存解除、per-phase境界で停止 | 型検査・geometry4ファイル15テストPASS。別計算で基本30/30合同、手作業で応用15/15個数・内訳一致。全7問の包含ヒントを確認、意味内容のPlan変更なし |
 
+| 2026-10-15T16:30:07+09:00 | EXECUTION_UPDATE | P2境界コミットf96f6f9を記録しP3・T6をin_progressに変更。既存attemptsを保持 | stable仕様・現行PlanレビューPASS・最新Handoffを確認。ローカルOKF規約欠落のためPlan記載のグローバル同一規約を全文読了 |
+
+| 2026-10-15T16:33:30+09:00 | EXECUTION_UPDATE | T6実装完了、implementedとして独立検証へ | 4描画・解説部品とCSS、実装者の型検査・ビルドPASS。線・辺角印・円半径・重ね合わせ方向を実装レビューで調整 |
+
+| 2026-10-15T16:35:06+09:00 | EXECUTION_UPDATE | T6独立検証PASSでvalidated、T7をin_progressに変更 | fresh task_validatorの型検査・ビルドPASS。共通枠・重ね合わせ・辺角表示・輪郭切替・0個・ラベルを確認。実表示はP4、等幅コンテナ接続はT7 |
+
+| 2026-10-15T16:42:48+09:00 | EXECUTION_UPDATE | T7実装完了、implementedとして独立検証へ | 指定session/interaction10テスト・型検査PASS。古いrunテストの固定ID fixtureを補正（同一原因1回）。補助ブラウザー確認のdev応答はタイムアウト、調査中 |
+
+| 2026-10-15T16:43:52+09:00 | EXECUTION_UPDATE | T7独立検証PASSでvalidated、T8をin_progressに変更 | fresh task_validatorでsession/interaction10件・型検査PASS。補助devブラウザーは起動直後の応答遅延解消後マウント成功、375pxで5枠112pxの等幅を確認 |
+
+| 2026-10-15T16:47:32+09:00 | EXECUTION_UPDATE | T8実装完了、implementedとして独立検証へ | 実装者のgeometry/interaction27テスト・型検査・ビルドPASS。基本編のfresh mount補助実操作で誤答後4/5・全問解説経由を確認。編集中HMRの状態は検証対象外 |
+
+| 2026-10-15T16:50:01+09:00 | EXECUTION_UPDATE | T8独立検証PASSでvalidated、P3 Phase統合検証へ | fresh task_validatorのgeometry/interaction6ファイル27テスト・型検査・ビルドPASS。補助ブラウザーの応用5問・負数拒否・0個・輪郭2/2・5/5結果、基本誤答4/5、代表枠3幅等寸を確認 |
+
+| 2026-10-15T16:52:18+09:00 | EXECUTION_UPDATE | P3検証FAIL_LOCAL、T6を局所補正のため再開 | 型検査・geometry/interaction27テスト・ビルド・全9ステージ純粋遷移はPASS。円解説の半径1.2に対し縦線0.85と同長印の誤り。T6-circle-radius-diagramを1として記録 |
+
+| 2026-10-15T16:53:36+09:00 | EXECUTION_UPDATE | T6円解説を局所補正、implementedとしてfresh Task検証へ | 2本とも半径1.2に合わせ同長印を中点へ移動。実装者の型検査・ビルドPASS |
+
+| 2026-10-15T16:55:01+09:00 | EXECUTION_UPDATE | T6円解説補正をfresh task_validatorがPASS、validatedに戻しP3再検証へ | 半径1.2と中点0.6の一致を独立確認、型検査・ビルドPASS。T6-circle-radius-diagramは1を維持 |
+
+| 2026-10-15T16:57:40+09:00 | EXECUTION_UPDATE | P3再検証FAIL_LOCAL、T7カード特徴表示の局所補正を開始 | 円解説補正・型検査・27テスト・ビルド・9ステージ遷移はPASS。基本カードの短文だけでは特徴説明不足、既存stage.descriptionを所有済み帳面・結果へ表示する。T7-card-feature-copyを1で記録 |
+
+| 2026-10-15T16:58:25+09:00 | EXECUTION_UPDATE | T7基本カード特徴表示を補正、implementedとしてfresh Task検証へ | 所有済み基本カードの帳面・結果へstage.descriptionを追加、短文を維持。未所有説明非表示・応用振り返りを保全。実装者型検査PASS |
+
+| 2026-10-15T16:59:47+09:00 | EXECUTION_UPDATE | T7基本カード補正をfresh task_validatorがPASS、validatedに戻しP3再検証へ | 所有済み基本6カードに特徴表示、未所有の説明非表示、応用振り返り保全を確認。型検査・session/interaction12テストPASS。T7-card-feature-copyは1を維持 |
+
+| 2026-10-15T17:02:52+09:00 | EXECUTION_UPDATE | P3最終再検証PASSでvalidated、P4依存解除。per-phase境界で停止 | 型検査・geometry/interaction6ファイル27テスト・ビルド・diff検査PASS。独立9ステージ45解説・誤答4/5・無効入力・再練習/放棄・9報酬IDを確認。意味内容のPlan変更なし |
+
 # Execution State
 
 - session-mode: per-phase
@@ -395,8 +425,8 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 | Phase | state | commit | attempts |
 | --- | --- | --- | --- |
 | P1 | validated | 0b6c11d14d49485c49eea9bcd025842bd1c14f4a | {T3-test-tuple-type: 1, T2-contour-tolerance-key: 1} |
-| P2 | validated | 次回EXECUTION_UPDATEで記録（本Handoffを含むPhaseコミット） | {T5-answer-hint-leak: 1, T5-overlap-rule-copy: 2, T5-review-record-mismatch: 1} |
-| P3 | pending | n/a | {} |
+| P2 | validated | f96f6f92d47826edcfa1dcbdcfffb12e82f25a96 | {T5-answer-hint-leak: 1, T5-overlap-rule-copy: 2, T5-review-record-mismatch: 1} |
+| P3 | validated | 次回EXECUTION_UPDATEで記録（本Handoffを含むPhaseコミット） | {T7-stale-run-test-fixture: 1, T6-circle-radius-diagram: 1, T7-card-feature-copy: 1} |
 | P4 | pending | n/a | {} |
 
 ## Task Validation Evidence（P1）
@@ -420,6 +450,24 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 | T5 | implementer補正 → fresh task_validator: PASS | `bun run test -- src/apps/geometry` 4ファイル15件PASS、`bun run typecheck` PASS。15問の全輪郭・禁止三角形・6題材・3難易度・円の正数/0・包含条件・回転・9ステージとカタログ・45IDを確認。初回FAILの個数露出・包含ヒント・教材記録を修正し再検証PASS。実表示はP4。 |
 
 - P2局所補正の最終Task検証：Phase検証で不足した4問の包含ヒントを補充し、全7問の必須包含ヒントを回帰確認。fresh task_validator PASS、geometry15テスト・型検査PASS。手作業個数列は `1,0,1,2,1 / 5,3,2,2,2 / 1,2,1,2,1`。T5-overlap-rule-copyは2を維持。
+
+## Task Validation Evidence（P3）
+
+| Task | 実装・独立検証 | 実行結果と証拠 |
+| --- | --- | --- |
+| T6 | implementer → fresh task_validator: PASS | 型検査・ビルドPASS。共通[-6,6]枠、候補から見本への合同重ね合わせ、辺・直角・半径の図示、番号付き輪郭、0個の操作非表示、44px・reduced-motionを確認。 |
+| T7 | implementer → fresh task_validator: PASS | session/interaction2ファイル10テスト・型検査PASS。9ステージ・説明、初回正答0〜5、誤答再試行、最終解説後だけ完了、古い問/run/token、重複、放棄、報酬ID完全一致を確認。古いrunテストfixtureの固定IDを1回修正。 |
+| T8 | implementer → fresh task_validator: PASS | geometry/interaction6ファイル27テスト・型検査・ビルドPASS。6種類の問題文、NumberInputと整数検証、無効入力と0、共通採点・解説・完了への接続を確認。 |
+
+- 補助ブラウザー確認：公開ルートを追加せず、Vite開発サーバー上でGeometryをProgressProvider内に一時マウント。基本circleステージは誤答後に正解し、全5解説を経て4/5。応用introは負数を拒否した後、数字ボタンとEnterで5問に回答し全解説を経て5/5。q02は輪郭操作0、q04は2/2まで切替。完了3履歴（square5/5、circle4/5、intro5/5）と報酬を確認。
+- 補助表示：代表square問の見本+4候補は375pxで全て112×112、768/1280pxで全て192×192、共通viewBox、横はみ出しなし。375pxの画面を目視。全30問の3幅確認・全45問目視はP4。
+- 補助確認の限界：初回dev起動はHTTP応答が遅延しタイムアウト。待機後は応答正常。一時ハーネスのReactモジュールdefault exportとstorage envelope参照を訂正。編集中HMRで状態が変わった操作は証拠にせず、fresh mountで再実施。公開ルート・本番プレビューE2E・全体回帰・保存不可と旧データ共存はP4で行う。
+
+- T6局所補正の最終Task検証：P3で指摘された円の解説図を2本とも半径1.2、同長印を中点0.6へ修正。fresh task_validatorの独立確認・型検査・ビルドPASS。Phase初回FAIL_LOCALと同一原因カウンタ1を保持。
+
+- T7局所補正の最終Task検証：所有済み基本カードの帳面・結果に既存stage.descriptionの特徴説明を追加、cardDescriptionを維持。fresh task_validatorが条件・基本6種類・未所有非表示・応用不変を確認しPASS。型検査・session/interaction12件PASS。Phase再検証FAIL_LOCALと同一原因カウンタ1を保持。
+
+- P3最終Phase検証：fresh phase_validator PASS。`bun run typecheck`、`bun run test -- src/apps/geometry src/shared/interaction`（6ファイル27件）、`bun run build`、`git diff --check`は全てPASS。独立一時実行で9ステージ・45解説・誤答後4/5・不正入力無変更・再練習/放棄リセット・9報酬ID完全一致を確認。円の半径・カード特徴の2指摘は解消、未解決none。
 
 # Phase Handoff
 
@@ -446,9 +494,19 @@ P4: T9（広場・保存の統合確認） → T10（全体検証・文書）
 - Validation notes: `bun run typecheck` PASS、`bun run test -- src/apps/geometry` 4ファイル15テストPASS。独立Phase検証の別実装の点集合・回転計算で基本30/30一致、応用15問の手作業の個数・内訳照合15/15一致（`1,0,1,2,1 / 5,3,2,2,2 / 1,2,1,2,1`）。T5初回Task FAILとP2初回FAIL_LOCALは補正し再検証PASS、attemptsは`T5-answer-hint-leak:1, T5-overlap-rule-copy:2, T5-review-record-mismatch:1`を維持。P1の既存domain/progress変更なし。P3では型検査・geometry/interactionテスト・ビルドを行う。
 - Commit: 本エントリーを含むP2境界コミットを直後に作成。ハッシュは次回開始時のEXECUTION_UPDATEでgit履歴から記録し、amendしない。
 
+## Handoff: P3 — 2026-10-15T17:02:52+09:00
+
+- Decisions: T6・T7・T8を実装し、独立Task検証・Phase最終再検証PASS。session-modeはper-phase、baseline none。Phase検証で円の半径図と所有済み基本カードの特徴表示を局所補正。仕様・計画の意味内容の変更はnone。P1・P2の教材と保存契約は変更なし。
+- Interfaces: `src/apps/geometry/index.tsx`のdefault export `Geometry`をP4で`#/geometry`へ登録する。`domain/session.ts`の`initialSession` / `transitionSession` / `canRecordCompletion`が純粋な進行・初回点・完了資格を管理。submit/advanceはsessionIdとquestionIdを要求する。`ShapeFigure({shape,label,className?})`、`MatchExplanation({question,shapeKind,stageDescription?})`、`CountDiagram({question,solutionIndex?,showSolutions?})`、`CountExplanation({question})`、`CountQuestionView({question,locked,value,feedback,headingRef?,onChange,onSubmit})`はnamed export。ゲームindexがstyles.cssを読み込む。未登録ルートや正解露出用機能の追加はnone。
+- Constraints discovered: 見本・候補の共通viewBoxは[-6,6]、実問のSVG枠は375pxで112px・768/1280pxで192px。補助確認は代表問のみ、全問はP4。入力は`parseIntegerInput`、NumberInputのmaxLengthは3。ガードはsessionId・問題ID・answer/advance別に生成し、renderで試行tokenを捕捉、誤答時だけrearmする。guard更新で再renderし、refだけ更新して古いtokenを残さない。画面/問題遷移はh2へfocusし、Enterのネイティブ二重発火とrepeatを抑止。基本カードの特徴は所有済みにだけstage.descriptionも表示する。公開ルート未登録のため本番ビルドでの実際のGeometryバンドルと公開導線はP4で確認する。
+- Open risks: 公開ルート・本番プレビュー・全45問目視・全基本30問の3幅尺度・キーボード完走/連打/長押し・reduced-motion・保存不可/旧記録共存・既存4ゲーム回帰はP4の受け入れ検証が必要。基本図形の小画面でのサイズ差の読み取りを全問確認する。P1の一部独立一時反例は未固定のまま。その他の未解決不具合はnone。
+- Deferred: P4=T9のホーム・ルートと保存共存、T10の全問E2E・教材目視・文書更新・全体回帰。Final EvaluationはP4後。計画外の延期はnone。
+- Validation notes: 最終独立Phase検証で型検査・geometry/interaction27テスト・ビルド・diff検査PASS、9ステージ45解説の純粋遷移と再練習・放棄・9報酬IDを確認。補助fresh dev mountで基本誤答4/5・応用5/5・負数拒否・0個操作なし・輪郭2/2・代表3幅等寸・保存を確認。dev初回遅延と一時ハーネスの修正は証拠欄参照。検証ブラウザーとdevサーバーは終了済み。P4で全体typecheck/test/test:e2e/buildを実行する。attemptsはT7-stale-run-test-fixture:1、T6-circle-radius-diagram:1、T7-card-feature-copy:1を保持。
+- Commit: 本エントリーを含むP3境界コミットを直後に作成。ハッシュは次回開始時のEXECUTION_UPDATEでgit履歴から記録し、amendしない。
+
 # Final Evaluation
 
-- P1・P2は実装・独立Task検証・Phase検証PASS。P3・P4はpending。Planはdraftを維持し、最終評価は最終Phase後に実施する。P2は基本30問・応用15問と取得API、内容テスト、日本語教材確認記録の下書きを追加。意味内容のPlan変更なし。
+- P1・P2・P3は実装・独立Task検証・Phase検証PASS。P4はpending。Planはdraftを維持し、最終評価は最終Phase後に実施する。P3はgeometry配下の描画・解説5部品、ゲームindex、CSS、sessionと10テストの計9ファイルを追加し、Planの実行記録を更新。型検査・関連27テスト・ビルドPASS。円図・基本カード特徴表示は局所補正済み。意味内容のPlan変更なし。
 - 計画の独立レビュー：2026-10-15T14:58:17+09:00に、現行の意味内容の版（generated.at: 2026-10-15T14:57:46+09:00）でPASS。初回の軽微な実行順図の指摘を修正し、再確認でもPASS。未解決の指摘・仕様変更要求・免除した指摘はない。
 - 検証actorは実際にレビューした環境のplan_reviewer/gpt-6-astraとして記録する。Planのライフサイクルは実装と最終評価が完了するまでdraftのまま。
 - 残る実装上のリスクは数値比較・全輪郭列挙・画面境界での入力処理。対応するテストと全問の表示確認は計画済みで、実行結果は実装段階で評価する。

@@ -1,0 +1,242 @@
+.geometry-shape,
+.geometry-count-diagram,
+.geometry-feature-mark {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* The fixed viewBox makes physical scale identical in the example and all options. */
+.geometry-shape {
+  aspect-ratio: 1;
+  width: min(100%, 12rem);
+  justify-self: center;
+  color: #234e70;
+}
+
+.geometry-shape polygon,
+.geometry-shape circle {
+  fill: #dbeafe;
+  stroke: currentColor;
+  stroke-width: .09;
+  stroke-linejoin: round;
+}
+
+.geometry-match-overlay .geometry-overlay-target {
+  fill: #fde68a;
+  stroke: #854d0e;
+  stroke-dasharray: .2 .12;
+}
+
+.geometry-match-overlay .geometry-overlay-source {
+  fill: #bfdbfe;
+  fill-opacity: .72;
+  stroke: #1d4ed8;
+}
+
+.geometry-explanation {
+  display: grid;
+  justify-items: center;
+  gap: .5rem;
+  text-align: center;
+}
+
+.geometry-explanation > .geometry-shape,
+.geometry-explanation > .geometry-count-diagram {
+  width: min(100%, 12rem);
+  max-height: 18rem;
+}
+
+.geometry-explanation h3,
+.geometry-explanation h4,
+.geometry-explanation p {
+  margin: 0;
+}
+
+.geometry-feature-mark {
+  width: min(7rem, 35vw);
+  overflow: visible;
+  color: #92400e;
+}
+
+.geometry-feature-mark polygon {
+  fill: #fef3c7;
+  stroke: #92400e;
+  stroke-width: .06;
+}
+
+.geometry-feature-mark .geometry-feature-circle {
+  fill: #fef3c7;
+  stroke: #92400e;
+  stroke-width: .06;
+}
+
+.geometry-feature-mark .geometry-feature-center {
+  fill: #1d4ed8;
+  stroke: none;
+}
+
+.geometry-feature-mark path {
+  fill: none;
+  stroke: #2563eb;
+  stroke-width: .08;
+  stroke-linecap: round;
+}
+
+.geometry-feature-mark .geometry-feature-radius-mark {
+  stroke-width: .1;
+}
+
+.geometry-count-diagram {
+  overflow: visible;
+  color: #334155;
+}
+
+.geometry-count-input {
+  justify-self: center;
+  width: min(100%, 20rem);
+}
+.geometry-count-input .number-pad button {
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+}
+.geometry-count-input .number-display { min-height: 48px; font-size: 1.25rem; }
+
+.geometry-count-lines line,
+.geometry-count-diagram > circle {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: .09;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.geometry-count-selected {
+  fill: #facc15;
+  fill-opacity: .34;
+  stroke: #b45309;
+  stroke-width: .14;
+  stroke-linejoin: round;
+}
+
+.geometry-count-number circle {
+  fill: #7c2d12;
+  stroke: white;
+  stroke-width: .04;
+}
+
+.geometry-count-number text {
+  fill: white;
+  font: 700 .42px system-ui, sans-serif;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.geometry-contour-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .75rem;
+}
+
+.geometry-contour-controls button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: .4rem .8rem;
+}
+
+.geometry-contour-controls button:focus-visible {
+  outline: 3px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
+/* Geometry screens (T7). The entire match frame uses one physical scale. */
+.geometry-panel {
+  display: grid;
+  gap: 1rem;
+  max-width: 58rem;
+  margin: 0 auto 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
+  border: 2px solid #d8e6ef;
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 8px 24px #234e7014;
+}
+.geometry-panel h2,
+.geometry-panel h3,
+.geometry-panel p { margin: 0; }
+.geometry-panel h2:focus { outline: 3px solid #1d4ed8; outline-offset: 4px; }
+.geometry-kicker { color: #52697a; font-weight: 800; }
+.geometry-stage-grid,
+.geometry-book-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; }
+.geometry-stage-card,
+.geometry-option,
+.geometry-secondary,
+.geometry-actions button,
+.geometry-panel > button { min-height: 44px; }
+.geometry-stage-card {
+  display: grid; align-content: start; justify-items: start; gap: .4rem; min-height: 7rem;
+  padding: .9rem; border: 2px solid #d8e6ef; border-radius: 1rem; background: #f7fbfe; color: #18364c; text-align: left; cursor: pointer;
+}
+.geometry-stage-card:hover,.geometry-stage-card:focus-visible,.geometry-option:focus-visible { border-color: #2563eb; outline: 3px solid #93c5fd; outline-offset: 2px; }
+.geometry-stage-number { display: grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: #dbeafe; font-weight: 900; }
+.geometry-stage-card small { color: #52697a; }
+.geometry-secondary { padding: .65rem 1rem; border: 2px solid #9bb5c7; border-radius: .75rem; background: white; color: #18364c; font-weight: 800; cursor: pointer; }
+.geometry-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; }
+.geometry-actions .primary-button { min-height: 48px; }
+.geometry-instruction-demo { display: flex; align-items: center; justify-content: center; gap: .75rem; padding: .75rem; border-radius: .9rem; background: #f5f9fc; text-align: center; }
+.geometry-instruction-demo > div { display: grid; justify-items: center; max-width: 12rem; }
+.geometry-instruction-demo .geometry-shape { width: 7rem; height: 7rem; }
+.geometry-count-demo { display: grid; }
+.geometry-count-demo > div { display: flex; align-items: center; justify-content: center; gap: .5rem; }
+.geometry-count-demo .geometry-shape { width: 5rem; height: 5rem; }
+.geometry-play { gap: 1.15rem; }
+.geometry-play-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.geometry-match-frame {
+  --match-size: 12rem;
+  display: grid; grid-template-columns: 1fr; gap: 1rem; justify-items: center;
+  width: fit-content; max-width: 100%; margin: 0 auto;
+}
+.geometry-match-example { display: grid; justify-items: center; align-content: start; gap: .4rem; width: var(--match-size); }
+.geometry-match-example > .geometry-shape { box-sizing: border-box; width: var(--match-size); height: var(--match-size); }
+.geometry-match-options { display: grid; grid-template-columns: repeat(2, var(--match-size)); gap: .6rem; }
+.geometry-option {
+  display: grid; justify-items: center; gap: .2rem; padding: 0; width: var(--match-size); box-sizing: border-box;
+  border: 2px solid #d8e6ef; border-radius: .9rem; background: #fff; color: #18364c; cursor: pointer;
+}
+.geometry-option[aria-pressed="true"] { border-color: #2563eb; background: #eff6ff; }
+.geometry-option:disabled { cursor: default; }
+.geometry-option > .geometry-shape { box-sizing: border-box; width: var(--match-size); height: var(--match-size); }
+.geometry-option > span { font-weight: 800; }
+.geometry-result { justify-items: center; text-align: center; }
+.geometry-score { font-size: 1.2rem; }
+.geometry-score strong { font-size: 2rem; }
+.geometry-result-reward,.geometry-book-card { padding: 1rem; border: 2px solid #ead28d; border-radius: 1rem; background: #fffaf0; }
+.geometry-result-reward > span { font-size: 2rem; color: #a16207; }
+.geometry-book-card h3 { margin: .35rem 0; }
+.geometry-book-card > span { font-size: 1.5rem; color: #a16207; }
+.geometry-book-card.is-unknown { border-color: #d8e6ef; background: #f7fbfe; color: #52697a; }
+.geometry-book-card.is-unknown > span { color: #52697a; }
+.geometry-book-card small { font-weight: 800; }
+
+@media (max-width: 767px) {
+  .geometry-stage-grid,.geometry-book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .geometry-match-frame { --match-size: 7rem; gap: .5rem; }
+  .geometry-match-options { grid-template-columns: repeat(2, var(--match-size)); gap: .35rem; }
+}
+@media (max-width: 360px) {
+  .geometry-match-frame { --match-size: 6.25rem; gap: .25rem; }
+  .geometry-match-options { gap: .2rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .geometry-shape,
+  .geometry-count-diagram,
+  .geometry-contour-controls button {
+    scroll-behavior: auto;
+    transition: none !important;
+    animation: none !important;
+  }
+}
