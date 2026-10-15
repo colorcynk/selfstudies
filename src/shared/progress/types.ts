@@ -1,5 +1,5 @@
-export type AppId = 'monsters' | 'shopping' | 'kanji' | 'calculation'
-export type ModeId = 'kuku' | 'standard' | 'multiplication-count' | 'multiplication-money' | 'reading-difference' | 'addition' | 'subtraction' | 'multiplication'
+export type AppId = 'monsters' | 'shopping' | 'kanji' | 'calculation' | 'geometry'
+export type ModeId = 'kuku' | 'standard' | 'multiplication-count' | 'multiplication-money' | 'reading-difference' | 'addition' | 'subtraction' | 'multiplication' | 'geometry-match' | 'geometry-count'
 export type RewardKind = 'monster' | 'stamp' | 'treasure'
 
 export interface CompletionRecord {

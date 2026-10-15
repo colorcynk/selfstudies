@@ -1,4 +1,5 @@
 import type { AppId, CompletionRecord, ModeId, RewardKind } from './types'
+import { GEOMETRY_CATALOG } from './geometryCatalog'
 
 export interface CatalogEntry {
   appId: AppId
@@ -22,6 +23,7 @@ export const CATALOG: readonly CatalogEntry[] = [
   ...[2, 3].flatMap((grade) => Array.from({ length: 4 }, (_, i) => ({ appId: 'kanji' as const, modeId: 'standard' as const, stageId: `kanji:g${grade}-0${i + 1}`, questionCount: 5, reward: { kind: 'treasure' as const, id: `treasure:g${grade}-0${i + 1}` } }))),
   { appId: 'kanji', modeId: 'reading-difference', stageId: 'kanji:reading-difference-01', questionCount: 5, reward: { kind: 'treasure', id: 'treasure:reading-difference-01' } },
   ...(['addition', 'subtraction', 'multiplication'] as const).flatMap((operation) => ([10, 25, 100] as const).map((size) => ({ appId: 'calculation' as const, modeId: operation, stageId: `calculation:${operation}-${size}`, questionCount: size, calculation: { operation, size } }))),
+  ...GEOMETRY_CATALOG,
 ]
 
 export function findCatalogEntry(record: Pick<CompletionRecord, 'appId' | 'modeId' | 'stageId'>) {

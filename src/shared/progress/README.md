@@ -15,6 +15,10 @@ Import `CATALOG`, `findCatalogEntry(record)`, `getReward(record)`, and `validate
 | `kanji` | `standard` | `kanji:g2-01` … `g2-04`, `kanji:g3-01` … `g3-04` | 5 | `treasure:gN-NN` |
 | `kanji` | `reading-difference` | `kanji:reading-difference-01` | 5 sentences | `treasure:reading-difference-01` |
 | `calculation` | `addition`, `subtraction`, `multiplication` | `calculation:{operation}-{size}` | size | none |
+| `geometry` | `geometry-match` | `geometry:match-circle`, `square`, `rectangle`, `equilateral`, `isosceles`, `right-triangle` | 5 | `treasure:shape-match-{shape}` |
+| `geometry` | `geometry-count` | `geometry:count-intro`, `count-composite`, `count-mixed` | 5 | `treasure:shape-count-{stage}` |
+
+Geometry stage and reward IDs are declared in `src/shared/progress/geometryCatalog.ts` and appended after the original 42 catalog entries. Geometry rewards use the `treasure:shape-` namespace so they do not enter the kanji `treasure:g` collection. Both geometry modes count five questions per completion.
 
 The shopping catalog contains 15 quests. Existing quest IDs, modes, numeric question counts, and stamp IDs for quests 01–06 remain unchanged; version 1 progress stays compatible.
 
